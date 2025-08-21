@@ -305,10 +305,6 @@ object HomeScreenDimensions {
     val SectionLabelBottomPadding: Dp = 13.dp
     val SectionLabelFontSize: Dp = 20.dp
 
-    // Manage Lab Button
-    val ManageLabHorizontalPadding: Dp = 16.dp
-    val ManageLabVerticalPadding: Dp = 16.dp
-
     // Grid
     val GridHorizontalPadding: Dp = 16.dp
     val GridVerticalSpacing: Dp = 13.dp
@@ -321,9 +317,81 @@ object HomeScreenDimensions {
 }
 
 
+object NewEquipmentDimensions {
+    // Screen
+    val ScreenPadding: Dp = 16.dp
+    val FieldSpacing: Dp = 13.dp
+    val BottomButtonPadding: Dp = 1.dp
 
+    // Image Card
+    val ImageCardHeight: Dp = 108.dp
+    val ImageCardCornerRadius: Dp = 4.dp
+    val ImageIconSize: Dp = 37.dp
+    val ImageCardSpacerHeight: Dp = 8.dp
+    val ImageCardLabelSize: TextUnit = 12.sp
 
+    // Dropdown Row
+    val DropDownRowSpacing: Dp = 4.dp
+}
 
+object ProdDescScreenDimensions {
+    // Screen
+    val ScreenPadding: Dp = 16.dp
+    val SectionSpacing: Dp = 12.dp
+    val TopSpacerHeight: Dp = 20.dp
+    val BottomButtonPadding: Dp = 16.dp
+
+    // Carousel
+    val CarouselHeight: Dp = 200.dp
+    val CarouselIndicatorSize: Dp = 6.dp
+    val CarouselSpacing: Dp = 16.dp
+    val CarouselBottomSpacer: Dp = 3.dp
+
+    // Product Description Card
+    val ProductCardHeight: Dp = 190.dp
+    val ProductCardPadding: Dp = 16.dp
+    val ProductCardSpacing: Dp = 16.dp
+    val ProductCardSpacingHeight: Dp = 3.dp
+    val ProductTitleFontSize: TextUnit = 16.sp
+    val InfoRowSpacing: Dp = 12.dp
+    val InfoRowFontSize: TextUnit = 14.sp
+    val FavIconSize: Dp = 20.dp
+    val FavIconPadding: Dp = 2.dp
+
+    // InCharge & Additional Info Cards
+    val CardPadding: Dp = 16.dp
+    val CardCollapsedHeight: Dp = 52.dp
+    val CardInnerSpacing: Dp = 12.dp
+    val CardHeaderFontSize: TextUnit = 16.sp
+    val CardSubHeaderFontSize: TextUnit = 14.sp
+    val CardIconSize: Dp = 20.dp
+    val CardIconPadding: Dp = 4.dp
+    val CardRowSpacing: Dp = 16.dp
+    val InChargeIconBoxSize: Dp = 28.dp
+    val InChargeIconSize: Dp = 20.dp
+    val InChargeIconPadding: Dp = 4.dp
+    val InChargeNamePadding: Dp = 10.dp
+    val InChargePadding: Dp = 10.dp
+
+    // Action Card
+    val ActionButtonSpacing: Dp = 18.dp
+    val ActionVerticalSpacing: Dp = 12.dp
+}
+
+object ProjectInfoDimensions {
+    // Paddings
+    val screenPadding: Dp = 16.dp
+    val topSpacerHeight: Dp = 20.dp
+    val verticalSpacing: Dp = 13.dp
+    val bottomSpacerHeight: Dp = 13.dp
+
+    // Text
+    val descriptionFontSize = 16.sp
+    val descriptionLineHeight = 20.sp
+
+    // Button
+    val buttonPadding: Dp = 16.dp
+}
 
 
 

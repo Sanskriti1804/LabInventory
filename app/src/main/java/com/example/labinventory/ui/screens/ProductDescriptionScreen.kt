@@ -1,7 +1,6 @@
 package com.example.labinventory.ui.screens
 
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsDraggedAsState
@@ -16,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -27,9 +25,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +40,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.labinventory.R
@@ -52,14 +49,13 @@ import com.example.labinventory.navigation.Screen
 import com.example.labinventory.ui.components.AppButton
 import com.example.labinventory.ui.components.AppCategoryIcon
 import com.example.labinventory.ui.components.AppCircularIcon
-import com.example.labinventory.ui.components.AppFAB
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomTopBar
+import com.example.labinventory.ui.theme.ProdDescScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.circularBoxColor
 import com.example.labinventory.ui.theme.darkTextColor
 import com.example.labinventory.ui.theme.editCardTextColor
-import com.example.labinventory.ui.theme.headerColor
 import com.example.labinventory.ui.theme.highlightColor
 import com.example.labinventory.ui.theme.weekendColor
 import com.example.labinventory.ui.theme.whiteColor
@@ -116,7 +112,7 @@ fun ProdDescScreen(
                         navController.navigate(Screen.CalendarScreen.route)
                     },
                     buttonText = "BOOK NOW",
-                    modifier = Modifier.padding(pxToDp(16))
+                    modifier = Modifier.padding(ProdDescScreenDimensions.BottomButtonPadding)
                 )
             }
             else{
@@ -124,7 +120,7 @@ fun ProdDescScreen(
                     onEditClick = {},
                     onDeleteClick = {},
                     onBookClick = {},
-                    modifier = Modifier.padding(pxToDp(16))
+                    modifier = Modifier.padding(ProdDescScreenDimensions.BottomButtonPadding)
                 )
             }
         },
@@ -134,10 +130,11 @@ fun ProdDescScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(pxToDp(16)),
-            verticalArrangement = Arrangement.spacedBy(pxToDp(12))
+                .padding(ProdDescScreenDimensions.ScreenPadding),
+            verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.SectionSpacing)
         ) {
-            Spacer(modifier = Modifier.height(pxToDp(20)))
+            Spacer(modifier = Modifier.height(ProdDescScreenDimensions.TopSpacerHeight))
+
             ProductCarousel(
                 images = productImage,
                 pageInteractionSource = pagerInteractionSource,
@@ -166,13 +163,13 @@ fun ProductCarousel(
     inactiveColor : Color = Color.DarkGray,
     activeColor : Color = highlightColor,
     indicatorShape: Shape = CircleShape,
-    indicatorSize : Dp = pxToDp(6),
+    indicatorSize : Dp = ProdDescScreenDimensions.CarouselIndicatorSize,
     isFav : Boolean = false
 ){
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(pxToDp(200)),
+            .height(ProdDescScreenDimensions.CarouselHeight),
         colors = CardDefaults.cardColors(
             containerColor = backgroundColor
         )
@@ -181,7 +178,7 @@ fun ProductCarousel(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(pxToDp(16))
+                .padding(ProdDescScreenDimensions.CarouselSpacing)
         ) {
             HorizontalPager(
                 state = pagerState, // Use the passed pagerState
@@ -204,7 +201,7 @@ fun ProductCarousel(
                         .fillMaxSize()
                 )
             }
-            Spacer(modifier = Modifier.height(pxToDp(16)))
+            Spacer(modifier = Modifier.height(ProdDescScreenDimensions.CarouselSpacing))
             HorizontalPagerIndicator(
                 pagerState = pagerState, // Use the passed pagerState
                 pageCount = images.size,
@@ -214,7 +211,7 @@ fun ProductCarousel(
                 modifier = Modifier
                     .size(indicatorSize)
             )
-            Spacer(modifier = Modifier.height(pxToDp(3)))
+            Spacer(modifier = Modifier.height(ProdDescScreenDimensions.CarouselBottomSpacer))
         }
 
     }
@@ -232,7 +229,7 @@ fun ProductDescriptionCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(pxToDp(190)),
+            .height(ProdDescScreenDimensions.ProductCardHeight),
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = cardContainerColor
@@ -241,12 +238,12 @@ fun ProductDescriptionCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(pxToDp(16))
+                .padding(ProdDescScreenDimensions.ProductCardPadding)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(pxToDp(16))
+                verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.ProductCardSpacing)
             ) {
                 CustomLabel(
                     header = "Canon EOS R50 V",
@@ -254,7 +251,7 @@ fun ProductDescriptionCard(
                     fontSize = 16.sp,
                     modifier = Modifier
                 )
-                Spacer(modifier = Modifier.height(pxToDp(3)))
+                Spacer(modifier = Modifier.height(ProdDescScreenDimensions.ProductCardSpacingHeight))
 
                 when(facilitiesList){
                     is UiState.Loading -> {
@@ -279,9 +276,9 @@ fun ProductDescriptionCard(
                 painter = painterResource(R.drawable.ic_favorite),
                 iconDescription = "Save Icon",
                 modifier = Modifier
-                    .padding(pxToDp(2))
+                    .padding(ProdDescScreenDimensions.FavIconPadding)
                     .align(Alignment.TopEnd),
-                iconSize = pxToDp(20),
+                iconSize = ProdDescScreenDimensions.FavIconSize,
             )
         }
     }
@@ -291,20 +288,20 @@ fun ProductDescriptionCard(
     fun InfoRow(label: String, value: String) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(pxToDp(12)),
+            horizontalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.InfoRowSpacing),
             verticalAlignment = Alignment.CenterVertically
         ) {
             CustomLabel(
                 header = label,
                 modifier = Modifier.weight(0.2f),
                 headerColor = darkTextColor.copy(alpha = 0.5f),
-                fontSize = 14.sp
+                fontSize = ProdDescScreenDimensions.InfoRowFontSize
             )
             CustomLabel(
                 header = value,
                 modifier = Modifier.weight(1f),
                 headerColor = darkTextColor.copy(alpha = 0.8f),
-                fontSize = 14.sp
+                fontSize = ProdDescScreenDimensions.InfoRowFontSize
             )
         }
     }
@@ -334,11 +331,11 @@ fun InChargeCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(16))
+                .padding(ProdDescScreenDimensions.CardPadding)
         ) {
             if (expanded) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.CardInnerSpacing),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     when(facilitiesList){
@@ -354,7 +351,7 @@ fun InChargeCard(
                                 CustomLabel(
                                     header = "InCharge",
                                     headerColor = darkTextColor.copy(0.9f),
-                                    fontSize = 16.sp,
+                                    fontSize = ProdDescScreenDimensions.CardHeaderFontSize,
                                     modifier = Modifier
                                 )
                                 Spacer(modifier = Modifier.height(pxToDp(5)))
@@ -374,13 +371,13 @@ fun InChargeCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(pxToDp(52)),
+                        .height(ProdDescScreenDimensions.CardCollapsedHeight),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     CustomLabel(
                         header = "InCharge",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp,
+                        fontSize = ProdDescScreenDimensions.CardHeaderFontSize,
                         modifier = Modifier
                     )
                 }
@@ -393,10 +390,10 @@ fun InChargeCard(
                 ),
                 iconDescription = "Expand Icon",
                 tint = darkTextColor,
-                iconSize = pxToDp(20),
+                iconSize = ProdDescScreenDimensions.CardIconSize,
                 modifier = Modifier
                     .align(iconAlignment)
-                    .padding(pxToDp(4))
+                    .padding(ProdDescScreenDimensions.CardIconPadding)
             )
         }
     }
@@ -410,7 +407,7 @@ fun InChargeRow(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.InChargePadding),
         modifier = Modifier.fillMaxWidth()
     ) {
         CustomLabel(
@@ -420,23 +417,23 @@ fun InChargeRow(
             modifier = Modifier.weight(0.2f)
         )
         Row(
-            horizontalArrangement = Arrangement.spacedBy(pxToDp(16)),
+            horizontalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.CardRowSpacing),
             modifier = Modifier
                 .weight(0.9f)
         ) {
             CustomLabel(
                 header = name,
                 headerColor = darkTextColor.copy(alpha = 0.8f),
-                fontSize = 14.sp,
-                modifier = Modifier.padding(pxToDp(10))
+                fontSize = ProdDescScreenDimensions.CardSubHeaderFontSize,
+                modifier = Modifier.padding(ProdDescScreenDimensions.InChargeNamePadding)
             )
 
             icons.forEach {
                 AppCircularIcon(
                     painter = painterResource(it),
-                    boxSize = pxToDp(28),
-                    iconPadding = pxToDp(4),
-                    iconSize = pxToDp(20),
+                    boxSize = ProdDescScreenDimensions.InChargeIconBoxSize,
+                    iconPadding = ProdDescScreenDimensions.InChargeIconPadding,
+                    iconSize = ProdDescScreenDimensions.InChargeIconSize,
                     tint = highlightColor,
                     boxColor = circularBoxColor
                 )
@@ -468,11 +465,11 @@ fun AdditionalInfoCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(16))
+                .padding(ProdDescScreenDimensions.CardPadding)
         ) {
             if (expanded) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.CardInnerSpacing),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     when(facilitiesList){
@@ -488,10 +485,9 @@ fun AdditionalInfoCard(
                                 CustomLabel(
                                     header = "InCharge",
                                     headerColor = darkTextColor.copy(0.9f),
-                                    fontSize = 16.sp,
+                                    fontSize = ProdDescScreenDimensions.CardHeaderFontSize,
                                     modifier = Modifier
                                 )
-                                Spacer(modifier = Modifier.height(pxToDp(5)))
 
                                 CustomLabel(
                                     header = currentFacility.description ?: "No Description found"
@@ -504,13 +500,13 @@ fun AdditionalInfoCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(pxToDp(52)),
+                        .height(ProdDescScreenDimensions.CardCollapsedHeight),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     CustomLabel(
                         header = "Additional Information",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp,
+                        fontSize = ProdDescScreenDimensions.CardHeaderFontSize,
                         modifier = Modifier
                     )
                 }
@@ -523,10 +519,10 @@ fun AdditionalInfoCard(
                 ),
                 iconDescription = "Expand Icon",
                 tint = darkTextColor,
-                iconSize = pxToDp(20),
+                iconSize = ProdDescScreenDimensions.InChargeIconSize,
                 modifier = Modifier
                     .align(iconAlignment)
-                    .padding(pxToDp(4))
+                    .padding(ProdDescScreenDimensions.InChargeIconPadding)
             )
         }
     }
@@ -553,10 +549,13 @@ fun UseCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .then(
-                    if (!expanded) Modifier.height(52.dp) else Modifier
+                    if (!expanded) Modifier.height(ProdDescScreenDimensions.CardCollapsedHeight) else Modifier
                 )
-                .padding(horizontal = pxToDp(16), vertical = pxToDp(8)),
-            verticalArrangement = Arrangement.spacedBy(pxToDp(8))
+                .padding(
+                    horizontal = ProdDescScreenDimensions.CardPadding,
+                    vertical = ProdDescScreenDimensions.CardPadding / 2
+                ),
+            verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.CardInnerSpacing)
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -565,7 +564,7 @@ fun UseCard(
                 CustomLabel(
                     header = "How to use",
                     headerColor = darkTextColor.copy(0.9f),
-                    fontSize = 16.sp,
+                    fontSize = ProdDescScreenDimensions.CardHeaderFontSize,
                     modifier = Modifier.weight(1f)
                 )
 
@@ -575,8 +574,8 @@ fun UseCard(
                     ),
                     iconDescription = "Expand Icon",
                     tint = darkTextColor,
-                    iconSize = pxToDp(20),
-                    modifier = Modifier.padding(pxToDp(4))
+                    iconSize = ProdDescScreenDimensions.CardIconSize,
+                    modifier =  Modifier.padding(ProdDescScreenDimensions.CardIconPadding)
                 )
             }
 
@@ -598,10 +597,12 @@ fun ActionCard(
         modifier = Modifier
             .fillMaxWidth(),
     ) {
-        Column() {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.ActionVerticalSpacing)
+        ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(pxToDp(18))
+                horizontalArrangement = Arrangement.spacedBy(ProdDescScreenDimensions.ActionButtonSpacing)
             ) {
                 AppButton(
                     onClick = onEditClick,
@@ -617,7 +618,7 @@ fun ActionCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(ProdDescScreenDimensions.ActionVerticalSpacing))
 
             AppButton(
                 onClick = onBookClick,
