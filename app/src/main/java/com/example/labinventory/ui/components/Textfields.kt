@@ -30,6 +30,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.labinventory.R
+import com.example.labinventory.ui.theme.TextFieldDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.darkTextColor
 import com.example.labinventory.util.pxToDp
@@ -39,7 +40,7 @@ fun AppTextField(
     modifier: Modifier = Modifier.fillMaxWidth(),
     value : String,
     onValueChange : (String) -> Unit,
-    shape: Shape = RoundedCornerShape(pxToDp(4)),
+    shape: Shape = RoundedCornerShape(TextFieldDimensions.CornerRadius),
     placeholder: String,
     textColor : Color = darkTextColor.copy(alpha = 0.7f),
     containercolor : Color = cardColor,
@@ -56,7 +57,7 @@ fun AppTextField(
             Text(
                 text = placeholder,
                 modifier = Modifier
-                    .padding(4.dp),
+                    .padding(TextFieldDimensions.PlaceholderPadding),
             )
         },
         colors = TextFieldDefaults.colors(
@@ -84,7 +85,7 @@ fun FilteredAppTextField(
     modifier: Modifier = Modifier.fillMaxWidth(),
     value: String,
     onValueChange: (String) -> Unit,
-    shape: Shape = RoundedCornerShape(pxToDp(4)),
+    shape: Shape = RoundedCornerShape(TextFieldDimensions.CornerRadius),
     placeholder: String,
     textColor: Color = darkTextColor.copy(alpha = 0.7f),
     containerColor: Color = cardColor,
@@ -111,7 +112,7 @@ fun FilteredAppTextField(
             placeholder = {
                 Text(
                     text = placeholder,
-                    modifier = Modifier.padding(4.dp)
+                    modifier = Modifier.padding(TextFieldDimensions.PlaceholderPadding)
                 )
             },
             colors = TextFieldDefaults.colors(
@@ -160,7 +161,7 @@ fun AppDropDownTextField(
     value : String,
     items : List<String>,
     onValueChange : (String) -> Unit,
-    shape: Shape = RoundedCornerShape(1.dp),
+    shape: Shape = RoundedCornerShape(TextFieldDimensions.CornerRadius),
     placeholder: String,
     textColor : Color = darkTextColor.copy(alpha = 0.7f),
     containercolor : Color = cardColor
@@ -178,13 +179,13 @@ fun AppDropDownTextField(
                     Text(
                         text = placeholder,
                         modifier = Modifier
-                            .padding(4.dp),
+                            .padding(TextFieldDimensions.Padding),
                     )
                     AppCategoryIcon(
                         painter = painterResource(R.drawable.ic_dropdown),
                         iconDescription = "Drop Down Icon",
                         modifier = Modifier
-                            .padding(4.dp)
+                            .padding(TextFieldDimensions.Padding)
                     )
                 }
             },
@@ -197,7 +198,7 @@ fun AppDropDownTextField(
                         .clickable {
                             expanded = !expanded
                         }
-                        .padding(8.dp)
+                        .padding(TextFieldDimensions.IconPadding)
                 )
             },
             colors = TextFieldDefaults.colors(

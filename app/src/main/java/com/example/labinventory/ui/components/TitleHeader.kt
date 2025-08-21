@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.labinventory.R
+import com.example.labinventory.ui.theme.TypographyDimensions
 import com.example.labinventory.ui.theme.categoryColor
 import com.example.labinventory.ui.theme.navLabelColor
 import com.example.labinventory.ui.theme.titleColor
@@ -26,9 +27,9 @@ fun CustomTitle(
     header : String,
     headerColor : Color = titleColor,
     fontWeight: FontWeight = FontWeight.Normal,
-    fontSize : TextUnit = 20.sp,
+    fontSize : TextUnit = TypographyDimensions.TitleFontSize,
     fontFamily: FontFamily = FontFamily(Font(R.font.font_alliance_regular_two)),
-    maxLine: Int = 1
+    maxLine: Int = TypographyDimensions.TitleMaxLines
 ){
     Text(
         text = header,
@@ -46,9 +47,9 @@ fun CustomSmallLabel(
     header : String,
     headerColor : Color = navLabelColor,
     fontWeight: FontWeight = FontWeight.Normal,
-    fontSize : TextUnit = 14.sp,
+    fontSize : TextUnit = TypographyDimensions.SmallLabelFontSize,
     fontFamily: FontFamily = FontFamily(Font(R.font.font_sf_pro_display)),
-    modifier : Modifier
+    modifier : Modifier = Modifier
 ){
     Text(
         text = header,
@@ -65,10 +66,10 @@ fun CustomLabel(
     header : String,
     headerColor : Color = categoryColor,
     fontWeight: FontWeight = FontWeight.Normal,
-    fontSize : TextUnit = pxToDp(16).value.sp,
+    fontSize : TextUnit = TypographyDimensions.LabelFontSize,
     fontFamily: FontFamily = FontFamily(Font(R.font.font_alliance_regular_two)),
     modifier: Modifier = Modifier,
-    maxLine: Int = 1
+    maxLine: Int =  TypographyDimensions.LabelMaxLines
 ){
 
     Text(
@@ -78,14 +79,16 @@ fun CustomLabel(
         style = TextStyle(
             fontWeight = fontWeight,
             fontSize = fontSize,
-            fontFamily = fontFamily),        maxLines = maxLine
+            fontFamily = fontFamily
+        ),
+        maxLines = maxLine
     )
 }
 
 @Composable
 fun CustomDivider(
-    modifier: Modifier = Modifier.padding(12.dp),
-    thickness : Dp = 2.dp,
+    modifier: Modifier = Modifier.padding(TypographyDimensions.DividerPadding),
+    thickness : Dp = TypographyDimensions.DividerThickness,
     divColor : Color = Color.DarkGray
 ){
     Divider(

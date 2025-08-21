@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.labinventory.R
+import com.example.labinventory.ui.theme.SearchBarDimensions
 import com.example.labinventory.ui.theme.Typography
 import com.example.labinventory.ui.theme.labelColor
 import com.example.labinventory.ui.theme.searchBarColor
@@ -47,15 +48,15 @@ fun AppSearchBar(
     iconDescription: String = "Search",
     backgroundColor: Color = searchBarColor,
     textColor: Color = labelColor,
-    shape: Shape = RoundedCornerShape(pxToDp(50)),
+    shape: Shape = RoundedCornerShape(SearchBarDimensions.CornerRadius),
 ) {
     Box(
         modifier = modifier
             .clip(shape)
             .background(backgroundColor)
-            .height(pxToDp(46))
+            .height(SearchBarDimensions.Height)
             .fillMaxWidth()
-            .padding(horizontal = pxToDp(16)), // inner padding
+            .padding(horizontal = SearchBarDimensions.HorizontalPadding),
         contentAlignment = Alignment.CenterStart
     ) {
         Row(
@@ -65,10 +66,10 @@ fun AppSearchBar(
                 painter = searchIcon,
                 contentDescription = iconDescription,
                 modifier = Modifier
-                    .size(pxToDp(21)),
+                    .size(SearchBarDimensions.IconSize),
                 tint = textColor
             )
-            Spacer(modifier = Modifier.width(pxToDp(16)))
+            Spacer(modifier = Modifier.width(SearchBarDimensions.IconTextSpacing))
 
             BasicTextField(
                 value = query,
@@ -76,7 +77,7 @@ fun AppSearchBar(
                 singleLine = true,
                 textStyle = Typography.labelSmall.copy(
                     color = labelColor,
-                    fontSize =15.sp
+                    fontSize = SearchBarDimensions.FontSize
                 ),
                 modifier = Modifier
                     .weight(1f)
@@ -87,7 +88,7 @@ fun AppSearchBar(
                             text = placeholder,
                             style = Typography.labelSmall.copy(
                                 color = labelColor,
-                                fontSize =15.sp
+                                fontSize = SearchBarDimensions.FontSize
                             )
                         )
                     }

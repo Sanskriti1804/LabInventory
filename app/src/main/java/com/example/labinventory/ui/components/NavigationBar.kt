@@ -23,9 +23,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.labinventory.navigation.bottomNavItems
+import com.example.labinventory.ui.theme.NavBarDimensions
 import com.example.labinventory.ui.theme.highlightColor
 import com.example.labinventory.ui.theme.navLabelColor
-import com.example.labinventory.ui.theme.someGrayColor
 import com.example.labinventory.ui.theme.someOtherGrayColor
 import com.example.labinventory.ui.theme.whiteColor
 import com.example.labinventory.util.pxToDp
@@ -47,14 +47,13 @@ fun CustomNavigationBar(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(0.5f.dp)
+                .height(NavBarDimensions.DividerHeight)
                 .background(dividerColor)
         )
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(pxToDp(101))
-            .padding(horizontal = 0.dp)
+            .height(NavBarDimensions.Height)
             .background(bottomBarColor),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
@@ -72,17 +71,17 @@ fun CustomNavigationBar(
                         }
                     }
                     .padding(
-                        top = pxToDp(23),
-                        bottom = pxToDp(29),
-                        start = pxToDp(10),
-                        end = pxToDp(10)
+                        top = NavBarDimensions.ItemTop,
+                        bottom = NavBarDimensions.ItemBottom,
+                        start = NavBarDimensions.ItemHorizontal,
+                        end = NavBarDimensions.ItemHorizontal
                     ),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(modifier = Modifier) {
                     AppNavIcon(
                         painter = painterResource(id = item.iconResId),
-                        iconSize = pxToDp(24),
+                        iconSize = NavBarDimensions.IconSize,
                         tint = if (isSelected) selectedColor else contentColor
                     )
 
@@ -90,28 +89,34 @@ fun CustomNavigationBar(
                         Box(
                             modifier = Modifier
                                 .align(Alignment.TopEnd)
-                                .offset(x = 10.dp, y = (-6).dp)
+                                .offset(
+                                    x = NavBarDimensions.BadgeOffsetX,
+                                    y = NavBarDimensions.BadgeOffsetY
+                                )
                                 .background(badgeColor, shape = CircleShape)
-                                .padding(horizontal = 4.dp, vertical = 1.dp)
+                                .padding(
+                                    horizontal = NavBarDimensions.BadgePaddingHorizontal,
+                                    vertical = NavBarDimensions.BadgePaddingVertical
+                                )
                         ) {
                             if (item.badgeCount != null) {
                                 Text(
                                     text = item.badgeCount.toString(),
                                     color = if (isSelected) selectedColor else contentColor,
-                                    fontSize = 10.sp
+                                    fontSize = NavBarDimensions.BadgeFontSize
                                 )
                             }
                         }
                     }
                 }
 
-                Spacer(modifier = Modifier.height(pxToDp(8)))
+                Spacer(modifier = Modifier.height(NavBarDimensions.LabelSpacing))
 
                 CustomSmallLabel(
                     header = item.label,
                     headerColor =  if (isSelected) selectedColor else contentColor,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(top = 3.dp)
+                    fontSize =  NavBarDimensions.LabelFontSize,
+                    modifier = Modifier.padding(top = NavBarDimensions.LabelTopPadding)
                 )
             }
         }
