@@ -34,6 +34,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import com.example.labinventory.R
+import com.example.labinventory.ui.theme.ChatBottomSheetDimensions
 import com.example.labinventory.ui.theme.aiColor
 import com.example.labinventory.ui.theme.navBackColor
 import com.example.labinventory.ui.theme.someGrayColor
@@ -43,22 +44,24 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ChatBottomSheet(
-//    navController: NavHostController,
     viewModel: SearchViewModel = koinViewModel()
 ) {
     val query by viewModel.query
 
     Surface(
-        shape = RoundedCornerShape(topStart = pxToDp(30), topEnd = pxToDp(30)),
+        shape = RoundedCornerShape(
+            topStart = ChatBottomSheetDimensions.CornerRadius,
+            topEnd = ChatBottomSheetDimensions.CornerRadius
+        ),
         color = navBackColor,
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = pxToDp(880))
+            .heightIn(min = ChatBottomSheetDimensions.MinHeight)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(15)),
+                .padding(ChatBottomSheetDimensions.HorizontalPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             // Top Icons Row
@@ -68,7 +71,7 @@ fun ChatBottomSheet(
                     contentDescription = "Chat Icon",
                     modifier = Modifier
                         .align(Alignment.TopCenter)
-                        .size(pxToDp(44))
+                        .size(ChatBottomSheetDimensions.ChatIconSize)
                 )
 
                 IconButton(
@@ -78,13 +81,13 @@ fun ChatBottomSheet(
                     Icon(
                         painter = painterResource(R.drawable.ic_close),
                         contentDescription = "Close",
-                        modifier = Modifier.size(pxToDp(26)),
+                        modifier = Modifier.size(ChatBottomSheetDimensions.CloseIconSize),
                         tint = someGrayColor
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(pxToDp(12)))
+            Spacer(modifier = Modifier.height(ChatBottomSheetDimensions.TitleSpacerHeight))
 
             Text(
                 text = "Share your project to get",
@@ -100,7 +103,7 @@ fun ChatBottomSheet(
                 textAlign = TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(ChatBottomSheetDimensions.FieldSpacerHeight))
 
             // Input Field
             SearchInputField(
@@ -126,7 +129,7 @@ fun SearchInputField(
         singleLine = true,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical =  ChatBottomSheetDimensions.InputVerticalPadding),
         keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Go),
         keyboardActions = KeyboardActions(onGo = {
             onSearch()

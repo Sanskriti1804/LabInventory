@@ -63,6 +63,7 @@ import com.example.labinventory.ui.components.AppSearchBar
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomNavigationBar
 import com.example.labinventory.ui.components.CustomTopBar
+import com.example.labinventory.ui.theme.EquipmentScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.categoryColor
 import com.example.labinventory.ui.theme.categoryIconColor
@@ -122,22 +123,22 @@ fun EquipmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = pxToDp(14),
-                        end = pxToDp(14),
-                        top = pxToDp(19),
-                        bottom = pxToDp(37)
+                        start = EquipmentScreenDimensions.SearchRowStartPadding,
+                        end = EquipmentScreenDimensions.SearchRowEndPadding,
+                        top = EquipmentScreenDimensions.SearchRowTopPadding,
+                        bottom = EquipmentScreenDimensions.SearchRowBottomPadding
                     )
             ) {
                 AppSearchBar(
                     query = "",
                     onQueryChange = {},
                     modifier = Modifier
-                        .height(pxToDp(46))
+                        .height(EquipmentScreenDimensions.SearchBarHeight)
                         .weight(1f),
                     placeholder = "Equipments, Tools, Supplies, etc..."
                 )
 
-                Spacer(modifier = Modifier.width(pxToDp(8)))
+                Spacer(modifier = Modifier.width(EquipmentScreenDimensions.SearchBarSpacerWidth))
 
                 AppCircularIcon(
                     onClick = { filterSortViewModel.showSheet() }
@@ -159,9 +160,9 @@ fun EquipmentScreen(
 
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(horizontal = pxToDp(16)),
-                        verticalArrangement = Arrangement.spacedBy(pxToDp(13)),
-                        horizontalArrangement = Arrangement.spacedBy(pxToDp(13)),
+                        contentPadding = PaddingValues(horizontal = EquipmentScreenDimensions.GridHorizontalPadding),
+                        verticalArrangement = Arrangement.spacedBy(EquipmentScreenDimensions.GridVerticalSpacing),
+                        horizontalArrangement = Arrangement.spacedBy(EquipmentScreenDimensions.GridHorizontalSpacing),
                     ) {
                         items(items.data) { item ->
                             EquipmentCard(
@@ -185,7 +186,7 @@ fun EquipmentScreen(
                     Text(
                         text = "Error loading items: $errorMessage",
                         color = Color.Red,
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(EquipmentScreenDimensions.EquipmentCardPadding)
                     )
                 }
             }
@@ -219,7 +220,7 @@ fun CategoryItem(
             tint = if (isSelected) selectedIconColor else iconColor
         )
 
-        Spacer(modifier = Modifier.height(pxToDp(8)))
+        Spacer(modifier = Modifier.height(EquipmentScreenDimensions.CategoryItemSpacer))
 
         CustomLabel(
             header = category.label,
@@ -239,11 +240,13 @@ fun CategoryRow(categories: List<EquipmentCategory>) {
     LazyRow(
         state = listState,
         contentPadding = PaddingValues(
-            start = pxToDp(28), end = pxToDp(28),
-            top = pxToDp(12), bottom = pxToDp(8)
+            start = EquipmentScreenDimensions.CategoryRowStartPadding,
+            end = EquipmentScreenDimensions.CategoryRowEndPadding,
+            top = EquipmentScreenDimensions.CategoryRowTopPadding,
+            bottom = EquipmentScreenDimensions.CategoryRowBottomPadding
         ),
-        horizontalArrangement = Arrangement.spacedBy(pxToDp(37)),
-        modifier = Modifier.height(pxToDp(64))
+        horizontalArrangement = Arrangement.spacedBy(EquipmentScreenDimensions.CategoryRowItemSpacing),
+        modifier = Modifier.height(EquipmentScreenDimensions.CategoryRowHeight)
     ) {
         itemsIndexed(categories) { index, category ->
             Column(
@@ -261,13 +264,13 @@ fun CategoryRow(categories: List<EquipmentCategory>) {
                     onClick = {  }
                 )
 
-                Spacer(modifier = Modifier.height(pxToDp(8)))
+                Spacer(modifier = Modifier.height(EquipmentScreenDimensions.CategoryItemSpacer))
 
                 if (category.id == selectedCategoryId) {
                     Box(
                         Modifier
-                            .width(pxToDp(30))
-                            .height(pxToDp(1))
+                            .width(EquipmentScreenDimensions.CategoryUnderlineWidth)
+                            .height(EquipmentScreenDimensions.CategoryUnderlineHeight)
                             .background(categoryColor)
                     )
                 }
@@ -284,8 +287,8 @@ fun EquipmentCard(
     equipName : String,
     onClick: () -> Unit = {},
     shape: Shape = RectangleShape,
-    imageHeight: Dp = pxToDp(191),
-    detailHeight: Dp = pxToDp(69),
+    imageHeight: Dp = EquipmentScreenDimensions.EquipmentImageHeight,
+    detailHeight: Dp = EquipmentScreenDimensions.EquipmentDetailHeight,
     isSaved : Boolean = false,
     saveClick : () -> Unit = {},
     facilityName : String
@@ -294,7 +297,12 @@ fun EquipmentCard(
 
     Card(
         modifier = Modifier
-            .padding(top = pxToDp(12), bottom = pxToDp(17), start = pxToDp(17), end = pxToDp(12)),
+            .padding(
+                top = EquipmentScreenDimensions.EquipmentCardTopPadding,
+                bottom = EquipmentScreenDimensions.EquipmentCardBottomPadding,
+                start = EquipmentScreenDimensions.EquipmentCardStartPadding,
+                end = EquipmentScreenDimensions.EquipmentCardEndPadding
+            ),
         onClick = onClick,
         shape = shape
     ) {
@@ -310,17 +318,17 @@ fun EquipmentCard(
                     contentDescription = "Equipment Image",
                     modifier = Modifier
                         .align(Alignment.Center)
-                        .padding(horizontal = pxToDp(12), vertical = pxToDp(12)),
+                        .padding(EquipmentScreenDimensions.EquipmentImageInnerPadding),
                     contentScale = ContentScale.Crop
                 )
                 AppCategoryIcon(
                     painter = painterResource(R.drawable.ic_save),
                     iconDescription = "Save icon",
-                    iconSize = pxToDp(18),
+                    iconSize = EquipmentScreenDimensions.SaveIconSize,
                     tint = if (isSaved) highlightColor else navLabelColor,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
-                        .padding(pxToDp(8))
+                        .padding(EquipmentScreenDimensions.SaveIconPadding)
                         .clickable{
                             saveClick()
                         }
@@ -332,43 +340,45 @@ fun EquipmentCard(
                     .height(detailHeight)
                     .fillMaxWidth()
                     .background(whiteColor)
-                    .padding(top = pxToDp(6)),
+                    .padding(top = EquipmentScreenDimensions.DetailTopPadding),
                 horizontalAlignment = Alignment.Start
             ) {
                 CustomLabel(
                     header = equipName,
                     headerColor = darkTextColor,
-                    fontSize = pxToDp(12).value.sp,
-                    modifier = Modifier.padding(top = pxToDp(2))
+                    fontSize = EquipmentScreenDimensions.LabelFontSize.value.sp,
+                    modifier = Modifier.padding(top = EquipmentScreenDimensions.LabelTopPadding)
                 )
 
                 CustomLabel(
                     header =  available,
                     headerColor = highlightColor,
-                    fontSize = pxToDp(12).value.sp,
-                    modifier = Modifier.padding(top = pxToDp(3), bottom = pxToDp(3))
+                    fontSize = EquipmentScreenDimensions.LabelFontSize.value.sp,
+                    modifier = Modifier.padding(
+                        top = EquipmentScreenDimensions.LabelAvailableTopPadding,
+                        bottom = EquipmentScreenDimensions.LabelAvailableBottomPadding
+                    )
                 )
 
                 CustomLabel(
                     header = facilityName,
                     headerColor = lightTextColor,
-                    fontSize = pxToDp(12).value.sp,
-                    modifier = Modifier.padding(bottom = pxToDp(3))
+                    fontSize = EquipmentScreenDimensions.LabelFontSize.value.sp,
+                    modifier = Modifier.padding(bottom = EquipmentScreenDimensions.LabelFacilityBottomPadding)
                 )
 
                 Row {
                     AppCategoryIcon(
                         painter = painterResource(R.drawable.ic_location),
                         iconDescription = "location icon",
-                        iconSize = pxToDp(12),
+                        iconSize = EquipmentScreenDimensions.LocationIconSize,
                         tint = lightTextColor
                     )
-                    Spacer(modifier = Modifier.width(pxToDp(5)))
+                    Spacer(modifier = Modifier.width(EquipmentScreenDimensions.LocationSpacerWidth))
                     CustomLabel(
                         header = "IDC, Photo Studio",
                         headerColor = lightTextColor,
-                        fontSize = pxToDp(12).value.sp,
-                        modifier = Modifier.padding(bottom = pxToDp(0))
+                        fontSize = EquipmentScreenDimensions.LabelFontSize.value.sp
                     )
                 }
             }

@@ -63,6 +63,7 @@ import com.example.labinventory.ui.components.AppButton
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomTopBar
 import com.example.labinventory.ui.components.EditButton
+import com.example.labinventory.ui.theme.CalendarDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.darkTextColor
 import com.example.labinventory.ui.theme.daysColor
@@ -118,7 +119,7 @@ fun CalendarScreen(
                 onClick = {
                     navController.navigate(Screen.ProjectInfoScreen.route)
                 },
-                modifier = Modifier.padding(pxToDp(16))
+                modifier = Modifier.padding(CalendarDimensions.ScreenPadding)
             )
         }
     ) { paddingValues ->
@@ -126,11 +127,11 @@ fun CalendarScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(pxToDp(20))
+                .padding(CalendarDimensions.ScreenPadding),
+            verticalArrangement = Arrangement.spacedBy(CalendarDimensions.ColumnSpacing)
            ) {
 
-            Spacer(modifier = Modifier.height(pxToDp(10)))
+            Spacer(modifier = Modifier.height(CalendarDimensions.SmallSpacerHeight))
 
             MonthTabRow(
                 months = months,
@@ -160,7 +161,6 @@ fun CalendarScreen(
             EquipBookingCard(
                 productInfo = bookingViewmodel.productInfo,
             )
-
         }
     }
 }
@@ -175,14 +175,14 @@ fun MonthTabRow(
 ) {
     LazyRow(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(pxToDp(12))
+        horizontalArrangement = Arrangement.spacedBy(CalendarDimensions.MonthTabHorizontalSpacing)
     ) {
         items(months) { month ->
             val isSelected = month == currentMonth
 
             Box(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(pxToDp(4)))
+                    .clip(RoundedCornerShape(CalendarDimensions.MonthTabCornerRadius))
                     .background(if (isSelected) highlightColor else cardColor)
                     .clickable { onMonthSelected(month) }
             ) {
@@ -190,7 +190,10 @@ fun MonthTabRow(
                     header = month.month.name.lowercase().replaceFirstChar { it.uppercase() },
                     headerColor = if (isSelected) whiteColor.copy(alpha = 0.9f) else darkTextColor.copy(alpha = 0.9f),
                     modifier = Modifier
-                        .padding(horizontal = pxToDp(45), vertical = pxToDp(12)),
+                        .padding(
+                            horizontal = CalendarDimensions.MonthTabHorizontalPadding,
+                            vertical = CalendarDimensions.MonthTabVerticalPadding
+                        ),
                     fontSize = 14.sp
                 )
             }
@@ -206,7 +209,7 @@ fun DaysOfWeekHeader(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(pxToDp(44))
+        horizontalArrangement = Arrangement.spacedBy(CalendarDimensions.DayOfWeekSpacing)
     ) {
         daysOfWeek.forEach { day ->
             val isWeekend = day == DayOfWeek.SUNDAY || day == DayOfWeek.SATURDAY
@@ -222,12 +225,10 @@ fun DaysOfWeekHeader(
     }
 }
 
-
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CalendarGrid(
-    dates: List<LocalDate>, // Should be ordered from Sunday to Saturday in each week
+    dates: List<LocalDate>,
     selectedDate: LocalDate,
     today: LocalDate,
     onDateClick: (LocalDate) -> Unit
@@ -235,12 +236,12 @@ fun CalendarGrid(
     val weeks = dates.chunked(7)
 
     Column(
-        verticalArrangement = Arrangement.spacedBy(pxToDp(4))
+        verticalArrangement = Arrangement.spacedBy(CalendarDimensions.GridVerticalSpacing)
     ) {
         weeks.forEach { week ->
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(pxToDp(4))
+                horizontalArrangement = Arrangement.spacedBy(CalendarDimensions.GridHorizontalSpacing)
             ) {
                 week.forEach { date ->
                     val isToday = date == today
@@ -253,7 +254,7 @@ fun CalendarGrid(
                         modifier = Modifier
                             .weight(1f)
                             .aspectRatio(1f)
-                            .clip(RoundedCornerShape(pxToDp(4)))
+                            .clip(RoundedCornerShape(CalendarDimensions.MonthTabCornerRadius))
                             .background(
                                 when {
                                     isSelected -> highlightColor
@@ -263,7 +264,7 @@ fun CalendarGrid(
                             )
                             .border(
                                 width = when {
-                                    isToday -> pxToDp(1)
+                                    isToday -> CalendarDimensions.TodayBorderWidth
 //                                    !inMonth -> 1.dp
                                     else -> 0.dp
                                 },
@@ -272,7 +273,7 @@ fun CalendarGrid(
                                     !inMonth -> Color.Transparent
                                     else -> Color.Transparent
                                 },
-                                shape = RoundedCornerShape(pxToDp(4))
+                                shape = RoundedCornerShape(CalendarDimensions.MonthTabCornerRadius)
                             )
                             .clickable { onDateClick(date) }
                     ) {
@@ -310,7 +311,7 @@ fun StatusCard(
     ) {
         Row(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(CalendarDimensions.StatusCardPadding)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
@@ -347,7 +348,6 @@ fun StatusCard(
     }
 }
 
-
 @Composable
 fun StatusLabel(
     label: String,
@@ -366,7 +366,10 @@ fun StatusLabel(
             modifier = if (isBoxed) {
                 Modifier
                     .background(containerColor)
-                    .padding(horizontal = pxToDp(10), vertical = pxToDp(2))
+                    .padding(
+                        horizontal = CalendarDimensions.StatusLabelBoxHorizontalPadding,
+                        vertical = CalendarDimensions.StatusLabelBoxVerticalPadding
+                    )
             } else Modifier
         ) {
             Text(
@@ -378,7 +381,8 @@ fun StatusLabel(
                 )
             )
         }
-        Spacer(modifier = Modifier.height(pxToDp(18)))
+        Spacer(modifier = Modifier.height(CalendarDimensions.StatusLabelSpacerHeight))
+
         Text(
             text = label,
             fontFamily = FontFamily(Font(R.font.font_alliance_regular_two)),
@@ -394,7 +398,7 @@ fun EquipBookingCard(
     productInfo: ProductInfo,
     cardShape: Shape = RectangleShape,
     containerColor : Color = whiteColor,
-    cardPadding : Dp = pxToDp(20)
+    cardPadding : Dp = CalendarDimensions.EquipCardPadding
 ) {
     Card(
         shape = cardShape,
@@ -412,12 +416,12 @@ fun EquipBookingCard(
                     contentDescription = "Product Image",
 
                     modifier = Modifier
-                        .size(pxToDp(76))
+                        .size(CalendarDimensions.EquipImageSize)
                 )
-                Spacer(modifier = Modifier.width(pxToDp(30)))
+                Spacer(modifier = Modifier.width(CalendarDimensions.EquipImageSpacer))
                 Column(
                     modifier = Modifier.weight(0.8f),
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(9))
+                    verticalArrangement = Arrangement.spacedBy(CalendarDimensions.EquipItemSpacing)
                 ) {
                     EquipBookingItem("Item", "Canon EOS R50 V")
                     EquipBookingItem("Location", "IDC School of Design")
@@ -452,67 +456,6 @@ fun EquipBookingItem(
     }
 }
 
-
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Composable
-//@Preview(showBackground = true)
-//fun CalendarScreenPreview() {
-//    CalendarScreen(viewModel = CalendarViewModel())
-//}
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Preview(showBackground = true)
-//@Composable
-//fun MonthTabRowPreview() {
-//    val months = remember { (0..5).map { YearMonth.now().plusMonths(it.toLong()) } }
-//    var selectedMonth by remember { mutableStateOf(YearMonth.now()) }
-//
-//    MonthTabRow(
-//        months = months.take(3),
-//        currentMonth = selectedMonth,
-//        onMonthSelected = { selectedMonth = it }
-//    )
-//}
-
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Preview(showBackground = true, name = "Days Of Week Header")
-//@Composable
-//fun DaysOfWeekHeaderPreview() {
-//    val daysOfWeek = listOf(
-//        DayOfWeek.SUNDAY,
-//        DayOfWeek.MONDAY,
-//        DayOfWeek.TUESDAY,
-//        DayOfWeek.WEDNESDAY,
-//        DayOfWeek.THURSDAY,
-//        DayOfWeek.FRIDAY,
-//        DayOfWeek.SATURDAY
-//    )
-//
-//    MaterialTheme {
-//        Surface(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-//            DaysOfWeekHeader(
-//                daysOfWeek = daysOfWeek
-//            )
-//        }
-//    }
-//}
-
-
-//@RequiresApi(Build.VERSION_CODES.O)
-//@Composable
-//@Preview(showBackground = true)
-//fun CalendarGridPreview() {
-//    val sampleDates = generateSequence(LocalDate.now().withDayOfMonth(1)) { it.plusDays(1) }
-//        .take(42) // 6 weeks
-//        .toList()
-//
-//    CalendarGrid(
-//        dates = sampleDates,
-//        selectedDate = LocalDate.now().plusDays(3),
-//        today = LocalDate.now(),
-//        onDateClick = {}
-//    )
-//}
-
 @RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
@@ -526,11 +469,3 @@ fun StatusCardPreview() {
     )
 }
 
-//@Composable
-//@Preview(showBackground = true)
-//fun StatusLabelPreview() {
-//    Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-//        StatusLabel("Booked", "2025-08-01", isStrikethrough = true)
-//        StatusLabel("Today", "2025-07-28")
-//    }
-//}

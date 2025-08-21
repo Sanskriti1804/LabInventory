@@ -147,3 +147,130 @@ object BookingScreenDimensions {
     val BookingDatesLabelWidth: Dp = 80.dp
     val BookingDatesFontSize: TextUnit = 16.sp
 }
+
+object CalendarDimensions {
+    // Screen
+    val ScreenPadding: Dp = 16.dp
+    val ColumnSpacing: Dp = 20.dp
+    val SmallSpacerHeight: Dp = 10.dp
+
+    // Month Tabs
+    val MonthTabHorizontalSpacing: Dp = 12.dp
+    val MonthTabCornerRadius: Dp = 4.dp
+    val MonthTabHorizontalPadding: Dp = 45.dp
+    val MonthTabVerticalPadding: Dp = 12.dp
+
+    // Days of Week
+    val DayOfWeekSpacing: Dp = 44.dp
+
+    // Calendar Grid
+    val GridVerticalSpacing: Dp = 4.dp
+    val GridHorizontalSpacing: Dp = 4.dp
+    val TodayBorderWidth: Dp = 1.dp
+
+    // Status Card
+    val StatusCardPadding: Dp = 16.dp
+    val StatusLabelSpacerHeight: Dp = 18.dp
+    val StatusLabelBoxHorizontalPadding: Dp = 10.dp
+    val StatusLabelBoxVerticalPadding: Dp = 2.dp
+
+    // EquipBookingCard
+    val EquipCardPadding: Dp = 20.dp
+    val EquipImageSize: Dp = 76.dp
+    val EquipImageSpacer: Dp = 30.dp
+    val EquipItemSpacing: Dp = 9.dp
+}
+
+object ChatBottomSheetDimensions {
+    // Container
+    val CornerRadius: Dp = 30.dp
+    val MinHeight: Dp = 880.dp
+    val HorizontalPadding: Dp = 15.dp
+
+    // Icons
+    val ChatIconSize: Dp = 44.dp
+    val CloseIconSize: Dp = 26.dp
+
+    // Spacing
+    val TitleSpacerHeight: Dp = 12.dp
+    val FieldSpacerHeight: Dp = 24.dp
+
+    // Input field
+    val InputVerticalPadding: Dp = 8.dp
+}
+
+object EquipmentScreenDimensions {
+    // Top Search Row
+    val SearchRowStartPadding: Dp = 14.dp
+    val SearchRowEndPadding: Dp = 14.dp
+    val SearchRowTopPadding: Dp = 19.dp
+    val SearchRowBottomPadding: Dp = 37.dp
+    val SearchBarHeight: Dp = 46.dp
+    val SearchBarSpacerWidth: Dp = 8.dp
+
+    // Category Row
+    val CategoryRowStartPadding: Dp = 28.dp
+    val CategoryRowEndPadding: Dp = 28.dp
+    val CategoryRowTopPadding: Dp = 12.dp
+    val CategoryRowBottomPadding: Dp = 8.dp
+    val CategoryRowItemSpacing: Dp = 37.dp
+    val CategoryRowHeight: Dp = 64.dp
+    val CategoryLabelSpacer: Dp = 8.dp
+    val CategoryUnderlineWidth: Dp = 30.dp
+    val CategoryUnderlineHeight: Dp = 1.dp
+
+    // CategoryItem
+    val CategoryItemSpacer: Dp = 8.dp
+
+    // Grid
+    val GridHorizontalPadding: Dp = 16.dp
+    val GridVerticalSpacing: Dp = 13.dp
+    val GridHorizontalSpacing: Dp = 13.dp
+
+    // EquipmentCard
+    val EquipmentCardTopPadding: Dp = 12.dp
+    val EquipmentCardPadding: Dp = 16.dp
+    val EquipmentCardBottomPadding: Dp = 17.dp
+    val EquipmentCardStartPadding: Dp = 17.dp
+    val EquipmentCardEndPadding: Dp = 12.dp
+    val EquipmentImageHeight: Dp = 191.dp
+    val EquipmentDetailHeight: Dp = 69.dp
+    val EquipmentImageInnerPadding: Dp = 12.dp
+    val SaveIconSize: Dp = 18.dp
+    val SaveIconPadding: Dp = 8.dp
+    val LabelFontSize: Dp = 12.dp
+    val LabelTopPadding: Dp = 2.dp
+    val LabelAvailableTopPadding: Dp = 3.dp
+    val LabelAvailableBottomPadding: Dp = 3.dp
+    val LabelFacilityBottomPadding: Dp = 3.dp
+    val DetailTopPadding: Dp = 6.dp
+
+    // Location Row
+    val LocationIconSize: Dp = 12.dp
+    val LocationSpacerWidth: Dp = 5.dp
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
