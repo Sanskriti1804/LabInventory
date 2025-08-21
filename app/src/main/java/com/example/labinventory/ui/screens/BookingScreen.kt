@@ -48,6 +48,7 @@ import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomNavigationBar
 import com.example.labinventory.ui.components.CustomTopBar
 import com.example.labinventory.ui.components.EditButton
+import com.example.labinventory.ui.theme.BookingScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.categoryColor
 import com.example.labinventory.ui.theme.categoryIconColor
@@ -76,9 +77,9 @@ fun BookingScreen(
 
         Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(pxToDp(16))
+            .padding(BookingScreenDimensions.ScreenPadding)
             .padding(paddingValues)) {
-            Spacer(modifier = Modifier.height(pxToDp(27)))
+            Spacer(modifier = Modifier.height(BookingScreenDimensions.TopSpacerHeight))
 
             BookingTabSelector(
                 tabs = listOf(
@@ -89,7 +90,7 @@ fun BookingScreen(
                 onTabSelected = { selectedTab -> }
             )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(BookingScreenDimensions.CardContentSpacing))
 
             InfoCard(
                 productInfo = viewModel.productInfo,
@@ -101,30 +102,28 @@ fun BookingScreen(
     }
 }
 
-
-//endregion
 @Composable
 fun BookingTabSelector(tabs: List<TabItem>, onTabSelected: (BookingTab) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(BookingScreenDimensions.TabSpacing)
     ) {
         tabs.forEach {
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(8.dp) // apply padding here, outside the clickable column
+                    .padding(BookingScreenDimensions.TabPadding)
                     .clickable { onTabSelected(it.tab) }
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(10))
+                    verticalArrangement = Arrangement.spacedBy(BookingScreenDimensions.TabIconSpacing)
                 ) {
                     AppNavIcon(
                         painter = painterResource(id = it.iconRes),
                         iconDescription = it.label,
-                        iconSize = pxToDp(20),
+                        iconSize = BookingScreenDimensions.TabIconSize,
                         tint = if (it.isSelected) highlightColor else categoryIconColor
                     )
                     CustomLabel(
@@ -159,8 +158,11 @@ fun InfoCard(
     ) {
         Column(
             modifier = Modifier
-                .padding(horizontal = pxToDp(20), vertical = pxToDp(22)),
-            verticalArrangement = Arrangement.spacedBy(pxToDp(20))
+                .padding(
+                    horizontal = BookingScreenDimensions.CardHorizontalPadding,
+                    vertical = BookingScreenDimensions.CardVerticalPadding
+                ),
+            verticalArrangement = Arrangement.spacedBy(BookingScreenDimensions.CardContentSpacing)
         ) {
 
             Row {
@@ -168,45 +170,48 @@ fun InfoCard(
                     painter = painterResource(R.drawable.temp),
                     contentDescription = "Product Image",
 
-                    modifier = Modifier.size(pxToDp(76))
+                    modifier = Modifier.size(BookingScreenDimensions.ProductImageSize)
                 )
-                Spacer(modifier = Modifier.width(pxToDp(30)))
+                Spacer(modifier = Modifier.width(BookingScreenDimensions.ProductImageTextSpacing))
                 Column(
                     modifier = Modifier.weight(0.8f),
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(9))
+                    verticalArrangement = Arrangement.spacedBy(BookingScreenDimensions.ProductInfoSpacing)
                 ) {
                     CustomLabel(
                         header = productInfo.title,
-                        fontSize = 16.sp,
+                        fontSize = BookingScreenDimensions.ProductTitleFontSize,
                         modifier = Modifier,
                         headerColor = darkTextColor
                     )
                     CustomLabel(
                         header = productInfo.location,
-                        fontSize = 12.sp,
+                        fontSize = BookingScreenDimensions.ProductLocationFontSize,
                         modifier = Modifier,
                         headerColor = someGrayColor
                     )
                     CustomLabel(
                         header = productInfo.status.label,
-                        fontSize = 14.sp,
+                        fontSize =  BookingScreenDimensions.ProductStatusFontSize,
                         modifier = Modifier
-                            .padding(vertical = pxToDp(2))
+                            .padding(vertical = BookingScreenDimensions.StatusTopBottomPadding)
                             .background(
                                 color = productInfo.status.color,
-                                shape = RoundedCornerShape(pxToDp(20))
+                                shape = RoundedCornerShape(BookingScreenDimensions.StatusCornerRadius)
                             )
-                            .padding(horizontal = pxToDp(10), vertical = pxToDp(4)),
+                            .padding(
+                                horizontal = BookingScreenDimensions.StatusHorizontalPadding,
+                                vertical = BookingScreenDimensions.StatusVerticalPadding
+                            ),
                         headerColor = whiteColor
                     )
                 }
             }
 
-//            Spacer(modifier = Modifier.height(pxToDp(20)))
-            Divider(thickness = pxToDp(1), color = someGrayColor)
-//            Spacer(modifier = Modifier.height(pxToDp(20)))
+            Divider(thickness =  BookingScreenDimensions.DividerThickness, color = someGrayColor)
 
-            Column(verticalArrangement = Arrangement.spacedBy(pxToDp(16))) {
+
+            Column(verticalArrangement = Arrangement.spacedBy(BookingScreenDimensions.InChargeSpacing)) {
+
                 CustomLabel(
                     header = "InCharge",
                     headerColor = darkTextColor.copy(0.9f)
@@ -219,14 +224,13 @@ fun InfoCard(
                 )
             }
 
-//            Spacer(modifier = Modifier.height(16.dp))
             Divider()
-//            Spacer(modifier = Modifier.height(16.dp))
-            Column(verticalArrangement = Arrangement.spacedBy(pxToDp(18))) {
+
+            Column(verticalArrangement = Arrangement.spacedBy(BookingScreenDimensions.BookingDatesSpacing)) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = pxToDp(2)),
+                        .padding(bottom = BookingScreenDimensions.BookingDatesBottomPadding),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     CustomLabel(
@@ -256,18 +260,17 @@ fun InChargeRoww(label: String, name: String, icons: List<Int>? = null) {
                 header = "$label",
                 fontSize = 14.sp,
                 headerColor = darkTextColor.copy(0.5f),
-                modifier = Modifier.width(50.dp)
+                modifier = Modifier.width(BookingScreenDimensions.InChargeLabelWidth)
             )
             CustomLabel(
                 header = name,
                 fontSize = 14.sp,
                 modifier = Modifier,
                 headerColor = darkTextColor.copy(0.8f)
-
             )
         }
         icons?.let {
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            Row(horizontalArrangement = Arrangement.spacedBy(BookingScreenDimensions.InChargeRowIconSpacing)) {
                 it.forEach { iconRes ->
                     Icon(
                         painter = painterResource(id = iconRes),
@@ -295,12 +298,11 @@ fun DatesRow(label: String, name: String) {
                 fontSize = 16.sp,
                 headerColor = darkTextColor.copy(0.5f),
                 modifier = Modifier
-                    .width(80.dp)
+                    .width(BookingScreenDimensions.BookingDatesLabelWidth)
             )
             CustomLabel(
                 header = name,
-                fontSize = 16.sp,
-                modifier = Modifier,
+                fontSize = BookingScreenDimensions.BookingDatesFontSize,
                 headerColor = darkTextColor.copy(0.8f)
 
             )

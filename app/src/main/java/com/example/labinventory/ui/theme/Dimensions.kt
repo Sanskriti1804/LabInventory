@@ -115,7 +115,6 @@ object BookingScreenDimensions {
     val TabPadding: Dp = 8.dp
     val TabIconSpacing: Dp = 10.dp
     val TabIconSize: Dp = 20.dp
-    val TabLabelFontSize: TextUnit = 12.sp
 
     // InfoCard
     val CardHorizontalPadding: Dp = 20.dp
@@ -139,8 +138,6 @@ object BookingScreenDimensions {
 
     // InCharge section
     val InChargeSpacing: Dp = 16.dp
-    val InChargeRowSpacing: Dp = 18.dp
-    val InChargeLabelFontSize: TextUnit = 14.sp
     val InChargeLabelWidth: Dp = 50.dp
     val InChargeRowIconSpacing: Dp = 8.dp
 
