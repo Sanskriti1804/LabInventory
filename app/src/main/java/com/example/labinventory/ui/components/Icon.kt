@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.labinventory.R
+import com.example.labinventory.ui.theme.IconDimensions
 import com.example.labinventory.ui.theme.categoryIconColor
 import com.example.labinventory.ui.theme.labelColor
 import com.example.labinventory.ui.theme.navBackColor
@@ -31,11 +32,11 @@ import com.example.labinventory.util.pxToDp
 fun AppCircularIcon(
     painter : Painter = painterResource(R.drawable.ic_reset),
     iconDescription : String = "Circular Icon",
-    boxSize : Dp = pxToDp(46),
+    boxSize: Dp = IconDimensions.CircularBox,
     boxShape : Shape = CircleShape,
     boxColor : Color = searchBarColor,
-    iconPadding : Dp = pxToDp(11),
-    iconSize : Dp = pxToDp(22),
+    iconPadding: Dp = IconDimensions.CircularPadding,
+    iconSize: Dp = IconDimensions.CircularSize,
     onClick : () -> Unit = {},
     tint : Color = labelColor
 ){
@@ -64,7 +65,7 @@ fun AppCategoryIcon(
     painter : Painter,
     iconDescription : String = "Equipment Category Icon",
     modifier: Modifier = Modifier,
-    iconSize: Dp = pxToDp(24),
+    iconSize: Dp = IconDimensions.Medium,
     tint : Color = categoryIconColor
 ){
     Icon(
@@ -81,7 +82,7 @@ fun AppNavIcon(
     painter : Painter,
     iconDescription : String = "Navigation Icon",
     modifier: Modifier = Modifier,
-    iconSize : Dp = pxToDp(24),
+    iconSize: Dp = IconDimensions.Medium,
     tint : Color = navLabelColor,
 ){
     Icon(
@@ -98,7 +99,7 @@ fun AppNavBackIcon(
     painter : Painter = painterResource(R.drawable.ic_back),
     iconDescription : String = "Navigation Icon",
     modifier: Modifier = Modifier,
-    size : Dp = pxToDp(24),
+    size: Dp = IconDimensions.Medium,
     tint : Color = navBackColor,
     onClick: () -> Unit
 ){
@@ -108,7 +109,7 @@ fun AppNavBackIcon(
         modifier = modifier
             .size(size)
             .clickable{
-                onClick
+                onClick()
             },
         tint = tint
     )
