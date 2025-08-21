@@ -42,6 +42,7 @@ import com.example.labinventory.ui.components.AppFAB
 import com.example.labinventory.ui.components.AppSearchBar
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomNavigationBar
+import com.example.labinventory.ui.theme.HomeScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.categoryColor
 import com.example.labinventory.ui.theme.titleColor
@@ -91,22 +92,22 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = pxToDp(14),
-                        end = pxToDp(14),
-                        top = pxToDp(19),
-                        bottom = pxToDp(37)
+                        start = HomeScreenDimensions.SearchRowStartPadding,
+                        end = HomeScreenDimensions.SearchRowEndPadding,
+                        top = HomeScreenDimensions.SearchRowTopPadding,
+                        bottom = HomeScreenDimensions.SearchRowBottomPadding
                     )
             ) {
                 AppSearchBar(
                     query = "",
                     onQueryChange = {},
                     modifier = Modifier
-                        .height(pxToDp(46))
+                        .height(HomeScreenDimensions.SearchBarHeight)
                         .weight(1f),
                     placeholder = "Equipments, Tools, Supplies, etc..."
                 )
 
-                Spacer(modifier = Modifier.width(pxToDp(8)))
+                Spacer(modifier = Modifier.width(HomeScreenDimensions.SearchBarIconSpacing))
 
                 AppCircularIcon(
                     onClick = { filterSortViewModel.showSheet() }
@@ -115,7 +116,7 @@ fun HomeScreen(
 
             CustomLabel(
                 "Explore by Category",
-                fontSize = 20.sp,
+                fontSize = HomeScreenDimensions.SectionLabelFontSize.value.sp,
                 modifier = Modifier
                     .padding(start = pxToDp(16), bottom = pxToDp(13)),
                 headerColor = titleColor
@@ -126,7 +127,10 @@ fun HomeScreen(
                     buttonText = "Manage Lab",
                     onClick = { },
                     modifier = Modifier
-                        .padding(horizontal = pxToDp(16), vertical = pxToDp(16))
+                        .padding(
+                            start = HomeScreenDimensions.SectionLabelStartPadding,
+                            bottom = HomeScreenDimensions.SectionLabelBottomPadding
+                        )
                         .fillMaxWidth()
                 )
             }
@@ -150,9 +154,11 @@ fun HomeScreen(
                 is UiState.Success -> {
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(horizontal = pxToDp(16)),
-                        verticalArrangement = Arrangement.spacedBy(pxToDp(13)),
-                        horizontalArrangement = Arrangement.spacedBy(pxToDp(13)),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = HomeScreenDimensions.GridHorizontalPadding),
+                        verticalArrangement = Arrangement.spacedBy(HomeScreenDimensions.GridVerticalSpacing),
+                        horizontalArrangement = Arrangement.spacedBy(HomeScreenDimensions.GridHorizontalSpacing)
                     ) {
                         items(categories.data) { item ->
                             AppCategoryCard(
@@ -166,8 +172,7 @@ fun HomeScreen(
                 is UiState.Error -> {
                     Text(
                         text = "Error loading categories",
-                        color = Color.Red,
-                        modifier = Modifier.padding(16.dp)
+                        color = Color.Red
                     )
                 }
             }
@@ -184,7 +189,7 @@ fun AppCategoryCard(
 ){
     Card(
         modifier = Modifier
-            .height(pxToDp(110)),
+            .height(HomeScreenDimensions.CategoryCardHeight),
         onClick = onClick,
         shape = shape,
         colors = CardDefaults.cardColors(
@@ -194,7 +199,7 @@ fun AppCategoryCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(pxToDp(16))
+                .padding(HomeScreenDimensions.CategoryCardPadding)
         ){
 
             CustomLabel(
@@ -202,7 +207,7 @@ fun AppCategoryCard(
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .fillMaxWidth(0.8f),
-                fontSize = 16.sp,
+                fontSize = HomeScreenDimensions.CategoryCardFontSize.value.sp,
                 headerColor = categoryColor
             )
 

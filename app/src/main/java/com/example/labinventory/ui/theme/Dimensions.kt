@@ -289,7 +289,36 @@ object FilterSortDimensions {
     val ButtonHorizontalSpacing: Dp = 8.dp
 }
 
+object HomeScreenDimensions {
+    // Search Row
+    val SearchRowStartPadding: Dp = 14.dp
+    val SearchRowEndPadding: Dp = 14.dp
+    val SearchRowTopPadding: Dp = 19.dp
+    val SearchRowBottomPadding: Dp = 37.dp
 
+    // Search Bar
+    val SearchBarHeight: Dp = 46.dp
+    val SearchBarIconSpacing: Dp = 8.dp
+
+    // Section Label
+    val SectionLabelStartPadding: Dp = 16.dp
+    val SectionLabelBottomPadding: Dp = 13.dp
+    val SectionLabelFontSize: Dp = 20.dp
+
+    // Manage Lab Button
+    val ManageLabHorizontalPadding: Dp = 16.dp
+    val ManageLabVerticalPadding: Dp = 16.dp
+
+    // Grid
+    val GridHorizontalPadding: Dp = 16.dp
+    val GridVerticalSpacing: Dp = 13.dp
+    val GridHorizontalSpacing: Dp = 13.dp
+
+    // Category Card
+    val CategoryCardHeight: Dp = 110.dp
+    val CategoryCardPadding: Dp = 16.dp
+    val CategoryCardFontSize: Dp = 16.dp
+}
 
 
 
