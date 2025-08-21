@@ -250,6 +250,45 @@ object EquipmentScreenDimensions {
     val LocationSpacerWidth: Dp = 5.dp
 }
 
+object FilterSortDimensions {
+
+    // Sheet
+    val SheetCornerRadius: Dp = 10.dp
+    val SheetPadding: Dp = 16.dp
+    val SheetTopSpacer: Dp = 18.dp
+    val SectionSpacer: Dp = 14.dp
+    val BottomSpacer: Dp = 24.dp
+
+    // Tabs
+    val TabHorizontalPadding: Dp = 16.dp
+    val TabIndicatorHeight: Dp = 1.dp
+    val TabIndicatorCornerRadius: Dp = 2.dp
+    val TabTextSize: TextUnit = 20.sp
+
+    // Filter Section
+    val FilterSectionVerticalPadding: Dp = 14.dp
+    val FilterSectionSpacer: Dp = 16.dp
+    val FilterLabelTextSize: TextUnit = 14.sp
+
+    // Chip Group
+    val ChipHorizontalSpacing: Dp = 12.dp
+    val ChipVerticalSpacing: Dp = 12.dp
+    val ChipCornerRadius: Dp = 4.dp
+    val ChipBorderWidth: Dp = 1.dp
+    val ChipTextSize: TextUnit = 12.sp
+    val ChipHorizontalPadding: Dp = 9.dp
+    val ChipVerticalPadding: Dp = 6.dp
+
+    // Sort List
+    val SortItemVerticalPadding: Dp = 26.dp
+    val SortItemHorizontalPadding: Dp = 19.dp
+    val SortDividerHorizontalPadding: Dp = 16.dp
+    val SortItemTextSize: TextUnit = 14.sp
+
+    // Buttons Row
+    val ButtonHorizontalSpacing: Dp = 8.dp
+}
+
 
 
 

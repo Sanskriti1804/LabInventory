@@ -24,6 +24,7 @@ import com.example.labinventory.data.model.FilterTab
 import com.example.labinventory.data.model.SortOption
 import com.example.labinventory.data.model.TabGroup
 import com.example.labinventory.ui.components.AppButton
+import com.example.labinventory.ui.theme.FilterSortDimensions
 import com.example.labinventory.ui.theme.categoryIconColor
 import com.example.labinventory.ui.theme.chipColor
 import com.example.labinventory.ui.theme.darkTextColor
@@ -62,15 +63,19 @@ fun FilterSortBottomSheet(
     ModalBottomSheet(
         onDismissRequest = { viewModel.hideSheet() },
         sheetState = sheetState,
-        shape = RoundedCornerShape(pxToDp(10)),
+        shape = RoundedCornerShape(FilterSortDimensions.SheetCornerRadius),
         containerColor = whiteColor
     ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(pxToDp(16))) {
-            Spacer(modifier = Modifier.height(pxToDp(18)))
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(FilterSortDimensions.SheetPadding)
+        ) {
+            Spacer(modifier = Modifier.height(FilterSortDimensions.SheetTopSpacer))
 
             FilterSortTabs(tabs = tabs, onTabSelected = viewModel::selectTab)
 
-            Spacer(modifier = Modifier.height(pxToDp(14)))
+            Spacer(modifier = Modifier.height(FilterSortDimensions.SectionSpacer))
 
             // Content based on selected tab
             val selectedTab = tabs.find { it.isSelected }?.tab ?: FilterTab.Filter
@@ -80,9 +85,11 @@ fun FilterSortBottomSheet(
                         Text(
                             text = group.section.name.lowercase().replaceFirstChar(Char::titlecase),
                             color = selectedChipTextColor,
-                            fontSize = 14.sp,
+                            fontSize = FilterSortDimensions.FilterLabelTextSize,
                             fontFamily = FontFamily(Font(R.font.font_alliance_regular_two)),
-                            modifier = Modifier.padding(vertical = pxToDp(14))
+                            modifier = Modifier.padding(
+                                vertical = FilterSortDimensions.FilterSectionVerticalPadding
+                            )
                         )
                         ChipGroup(
                             chips = group.chips,
@@ -99,7 +106,7 @@ fun FilterSortBottomSheet(
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(Modifier.height(FilterSortDimensions.FilterSectionSpacer))
 
             // Bottom Buttons
             Row(
@@ -107,7 +114,9 @@ fun FilterSortBottomSheet(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 AppButton(
-                    modifier = Modifier.weight(1f).padding(end = 8.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = FilterSortDimensions.ButtonHorizontalSpacing),
                     buttonText = "Reset",
                     containerColor = Color.LightGray,
                     contentColor = Color.Black,
@@ -148,11 +157,17 @@ fun FilterSortTabs(
             Modifier
                 .fillMaxWidth()
                 .wrapContentSize(Alignment.BottomStart)
-                .padding(start = pxToDp(16) , end = pxToDp(16))
+                .padding(
+                    start = FilterSortDimensions.TabHorizontalPadding,
+                    end = FilterSortDimensions.TabHorizontalPadding
+                )
                 .offset(x = currentTabPosition)
                 .width(tabPositions.getOrNull(selectedIndex)?.width ?: 0.dp)
-                .height(pxToDp(1))
-                .background(darkTextColor, shape = RoundedCornerShape(pxToDp(2)))
+                .height(FilterSortDimensions.TabIndicatorHeight)
+                .background(
+                    darkTextColor,
+                    shape = RoundedCornerShape(FilterSortDimensions.TabIndicatorCornerRadius)
+                )
         )
     }
 
@@ -173,7 +188,7 @@ fun FilterSortTabs(
                     Text(
                         text = tab.tab.name.replace("_", " "),
                         fontFamily = FontFamily(Font(R.font.font_alliance_regular_two)),
-                        fontSize = 20.sp
+                        fontSize = FilterSortDimensions.TabTextSize
                     )
                 }
             )
@@ -188,8 +203,8 @@ fun ChipGroup(
     onChipToggle: (String) -> Unit
 ) {
     FlowRow(
-        horizontalArrangement = Arrangement.spacedBy(pxToDp(12)),
-        verticalArrangement = Arrangement.spacedBy(pxToDp(12))
+        horizontalArrangement = Arrangement.spacedBy(FilterSortDimensions.ChipHorizontalSpacing),
+        verticalArrangement = Arrangement.spacedBy(FilterSortDimensions.ChipVerticalSpacing)
     ) {
         chips.forEach { chip ->
             FilterChipItem(chip = chip, onClick = { onChipToggle(chip.label) })
@@ -200,16 +215,19 @@ fun ChipGroup(
 @Composable
 fun FilterChipItem(chip: FilterChip, onClick: () -> Unit) {
     Surface(
-        shape = RoundedCornerShape(pxToDp(4)),
+        shape = RoundedCornerShape(FilterSortDimensions.ChipCornerRadius),
         color = if (chip.isSelected) chipSelectedColor else Color.Transparent,
-        border = BorderStroke(pxToDp(1), if (chip.isSelected) highlightColor else chipColor),
+        border = BorderStroke( FilterSortDimensions.ChipBorderWidth, if (chip.isSelected) highlightColor else chipColor),
         modifier = Modifier.clickable { onClick() }
     ) {
         Text(
             text = chip.label,
             color = selectedChipTextColor,
-            modifier = Modifier.padding(horizontal = pxToDp(9) , vertical = pxToDp(6) ),
-            fontSize = 12.sp,
+            modifier = Modifier.padding(
+                horizontal = FilterSortDimensions.ChipHorizontalPadding,
+                vertical = FilterSortDimensions.ChipVerticalPadding
+            ),
+            fontSize =  FilterSortDimensions.ChipTextSize,
             fontFamily = FontFamily(Font(R.font.font_alliance_regular_two))
         )
     }
@@ -230,14 +248,17 @@ fun SortList(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { onOptionSelected(option.label) }
-                    .padding(vertical = pxToDp(26), horizontal = pxToDp(19)),
+                    .padding(
+                        vertical = FilterSortDimensions.SortItemVerticalPadding,
+                        horizontal = FilterSortDimensions.SortItemHorizontalPadding
+                    ),
                 color = if (option.isSelected) highlightColor else selectedChipTextColor,
-                fontSize = 14.sp,
+                fontSize = FilterSortDimensions.SortItemTextSize,
                 fontFamily = FontFamily(Font(R.font.font_alliance_regular_two))
             )
 
             if (index != options.lastIndex) {
-                Divider(modifier = Modifier.padding(horizontal = pxToDp(16)))
+                Divider(modifier = Modifier.padding(horizontal = FilterSortDimensions.SortDividerHorizontalPadding))
             }
         }
     }
