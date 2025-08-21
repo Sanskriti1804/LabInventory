@@ -3,6 +3,8 @@ package com.example.labinventory.data.model
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 // Categories for responsiveness
 enum class WindowType { Compact, Medium, Expanded }

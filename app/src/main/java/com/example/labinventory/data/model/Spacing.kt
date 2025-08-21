@@ -1,14 +1,21 @@
 package com.example.labinventory.data.model
 
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+
 data class Spacing(
-    val tiny: androidx.compose.ui.unit.Dp = 4.dp,
-    val small: androidx.compose.ui.unit.Dp = 8.dp,
-    val medium: androidx.compose.ui.unit.Dp = 16.dp,
-    val large: androidx.compose.ui.unit.Dp = 24.dp,
-    val extraLarge: androidx.compose.ui.unit.Dp = 32.dp,
+    val tiny: Dp,
+    val small: Dp,
+    val medium: Dp,
+    val large: Dp,
+    val extraLarge: Dp,
 )
 
-val LocalSpacing = staticCompositionLocalOf { Spacing() }
+val LocalSpacing = staticCompositionLocalOf { CompactSpacing }
+
+// Spacing presets
+val CompactSpacing = Spacing(2.dp, 4.dp, 8.dp, 12.dp, 16.dp)
+val MediumSpacing = Spacing(4.dp, 8.dp, 16.dp, 24.dp, 32.dp)
+val ExpandedSpacing = Spacing(8.dp, 16.dp, 24.dp, 32.dp, 48.dp)

@@ -11,7 +11,12 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
+import com.example.labinventory.data.model.CompactSpacing
+import com.example.labinventory.data.model.ExpandedSpacing
+import com.example.labinventory.data.model.LocalSpacing
 import com.example.labinventory.data.model.LocalWindowSizeClass
+import com.example.labinventory.data.model.MediumSpacing
+import com.example.labinventory.data.model.WindowType
 import com.example.labinventory.data.model.rememberWindowSizeClass
 
 
@@ -35,8 +40,16 @@ fun LabInventoryTheme(
 ) {
     val windowSizeClass = rememberWindowSizeClass()
 
+    val spacing = when (windowSizeClass.windowType) {
+        WindowType.Compact -> CompactSpacing
+        WindowType.Medium -> MediumSpacing
+        WindowType.Expanded -> ExpandedSpacing
+    }
+
+
     CompositionLocalProvider(
-        LocalWindowSizeClass provides windowSizeClass
+        LocalWindowSizeClass provides windowSizeClass,
+        LocalSpacing provides spacing
     ) {
         MaterialTheme(
             typography = Typography,
