@@ -20,6 +20,7 @@ import com.example.labinventory.ui.screens.ProdDescScreen
 import com.example.labinventory.ui.screens.ProductDescriptionCard
 import com.example.labinventory.ui.screens.ProjectInfoScreen
 import com.example.labinventory.ui.theme.LabInventoryTheme
+import com.example.labinventory.util.ResponsiveAppWrapper
 
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -27,14 +28,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            ResponsiveAppWrapper {
                 MainApp()
-//            DescriptionCard()
-//            HomeScreen()
-//            EquipmentScreen()
-//            ProdDescScreen()
-//            ProjectInfoScreen()
-//            LabInventoryTheme {
-//            }
+            }
         }
     }
 }

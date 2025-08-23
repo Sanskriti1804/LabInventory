@@ -63,6 +63,8 @@ import com.example.labinventory.ui.components.AppSearchBar
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomNavigationBar
 import com.example.labinventory.ui.components.CustomTopBar
+import com.example.labinventory.ui.components.ResponsiveColumn
+import com.example.labinventory.ui.components.ResponsiveSpacer
 import com.example.labinventory.ui.theme.EquipmentScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.categoryColor
@@ -73,6 +75,7 @@ import com.example.labinventory.ui.theme.lightTextColor
 import com.example.labinventory.ui.theme.navLabelColor
 import com.example.labinventory.ui.theme.whiteColor
 import com.example.labinventory.util.pxToDp
+import com.example.labinventory.util.ResponsiveDimensions
 import com.example.labinventory.viewmodel.FacilitiesViewModel
 import com.example.labinventory.viewmodel.FilterSortViewModel
 import com.example.labinventory.viewmodel.ItemsViewModel
@@ -113,7 +116,7 @@ fun EquipmentScreen(
             )
         },
     ) { paddingValues ->
-        Column(
+        ResponsiveColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -123,22 +126,22 @@ fun EquipmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = EquipmentScreenDimensions.SearchRowStartPadding,
-                        end = EquipmentScreenDimensions.SearchRowEndPadding,
-                        top = EquipmentScreenDimensions.SearchRowTopPadding,
-                        bottom = EquipmentScreenDimensions.SearchRowBottomPadding
+                        start = ResponsiveDimensions.getScreenPadding(),
+                        end = ResponsiveDimensions.getScreenPadding(),
+                        top = ResponsiveDimensions.getScreenPadding(),
+                        bottom = ResponsiveDimensions.getScreenPadding() * 2
                     )
             ) {
                 AppSearchBar(
                     query = "",
                     onQueryChange = {},
                     modifier = Modifier
-                        .height(EquipmentScreenDimensions.SearchBarHeight)
+                        .height(ResponsiveDimensions.getSearchBarHeight())
                         .weight(1f),
                     placeholder = "Equipments, Tools, Supplies, etc..."
                 )
 
-                Spacer(modifier = Modifier.width(EquipmentScreenDimensions.SearchBarSpacerWidth))
+                Spacer(modifier = Modifier.width(ResponsiveDimensions.getScreenPadding() / 2))
 
                 AppCircularIcon(
                     onClick = { filterSortViewModel.showSheet() }
@@ -146,6 +149,8 @@ fun EquipmentScreen(
             }
 
             CategoryRow(categories = categories)
+
+            ResponsiveSpacer()
 
             when (items) {
                 is UiState.Loading -> {
@@ -159,10 +164,10 @@ fun EquipmentScreen(
                     val facilities = (facilitiesState as? UiState.Success)?.data ?: emptyList()
 
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
-                        contentPadding = PaddingValues(horizontal = EquipmentScreenDimensions.GridHorizontalPadding),
-                        verticalArrangement = Arrangement.spacedBy(EquipmentScreenDimensions.GridVerticalSpacing),
-                        horizontalArrangement = Arrangement.spacedBy(EquipmentScreenDimensions.GridHorizontalSpacing),
+                        columns = GridCells.Fixed(ResponsiveDimensions.getGridColumns()),
+                        contentPadding = PaddingValues(horizontal = ResponsiveDimensions.getScreenPadding()),
+                        verticalArrangement = Arrangement.spacedBy(ResponsiveDimensions.getGridSpacing()),
+                        horizontalArrangement = Arrangement.spacedBy(ResponsiveDimensions.getGridSpacing()),
                     ) {
                         items(items.data) { item ->
                             EquipmentCard(
@@ -186,7 +191,7 @@ fun EquipmentScreen(
                     Text(
                         text = "Error loading items: $errorMessage",
                         color = Color.Red,
-                        modifier = Modifier.padding(EquipmentScreenDimensions.EquipmentCardPadding)
+                        modifier = Modifier.padding(ResponsiveDimensions.getCardPadding())
                     )
                 }
             }

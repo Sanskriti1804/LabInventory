@@ -42,12 +42,15 @@ import com.example.labinventory.ui.components.AppFAB
 import com.example.labinventory.ui.components.AppSearchBar
 import com.example.labinventory.ui.components.CustomLabel
 import com.example.labinventory.ui.components.CustomNavigationBar
+import com.example.labinventory.ui.components.ResponsiveColumn
+import com.example.labinventory.ui.components.ResponsiveSpacer
 import com.example.labinventory.ui.theme.HomeScreenDimensions
 import com.example.labinventory.ui.theme.cardColor
 import com.example.labinventory.ui.theme.categoryColor
 import com.example.labinventory.ui.theme.titleColor
 import com.example.labinventory.ui.theme.whiteColor
 import com.example.labinventory.util.pxToDp
+import com.example.labinventory.util.ResponsiveDimensions
 import com.example.labinventory.viewmodel.ItemCategoriesViewModel
 import com.example.labinventory.viewmodel.FilterSortViewModel
 import com.example.labinventory.viewmodel.SearchViewModel
@@ -82,7 +85,7 @@ fun HomeScreen(
         },
         containerColor = whiteColor
     ) { paddingValues ->
-        Column(
+        ResponsiveColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues)
@@ -92,22 +95,22 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = HomeScreenDimensions.SearchRowStartPadding,
-                        end = HomeScreenDimensions.SearchRowEndPadding,
-                        top = HomeScreenDimensions.SearchRowTopPadding,
-                        bottom = HomeScreenDimensions.SearchRowBottomPadding
+                        start = ResponsiveDimensions.getScreenPadding(),
+                        end = ResponsiveDimensions.getScreenPadding(),
+                        top = ResponsiveDimensions.getScreenPadding(),
+                        bottom = ResponsiveDimensions.getScreenPadding() * 2
                     )
             ) {
                 AppSearchBar(
                     query = "",
                     onQueryChange = {},
                     modifier = Modifier
-                        .height(HomeScreenDimensions.SearchBarHeight)
+                        .height(ResponsiveDimensions.getSearchBarHeight())
                         .weight(1f),
                     placeholder = "Equipments, Tools, Supplies, etc..."
                 )
 
-                Spacer(modifier = Modifier.width(HomeScreenDimensions.SearchBarIconSpacing))
+                Spacer(modifier = Modifier.width(ResponsiveDimensions.getScreenPadding() / 2))
 
                 AppCircularIcon(
                     onClick = { filterSortViewModel.showSheet() }
@@ -116,9 +119,9 @@ fun HomeScreen(
 
             CustomLabel(
                 "Explore by Category",
-                fontSize = HomeScreenDimensions.SectionLabelFontSize.value.sp,
+                fontSize = (ResponsiveDimensions.getScreenPadding().value * 1.5).sp,
                 modifier = Modifier
-                    .padding(start = pxToDp(16), bottom = pxToDp(13)),
+                    .padding(start = ResponsiveDimensions.getScreenPadding(), bottom = ResponsiveDimensions.getScreenPadding()),
                 headerColor = titleColor
             )
 
@@ -128,8 +131,8 @@ fun HomeScreen(
                     onClick = { },
                     modifier = Modifier
                         .padding(
-                            start = HomeScreenDimensions.SectionLabelStartPadding,
-                            bottom = HomeScreenDimensions.SectionLabelBottomPadding
+                            start = ResponsiveDimensions.getScreenPadding(),
+                            bottom = ResponsiveDimensions.getScreenPadding()
                         )
                         .fillMaxWidth()
                 )
@@ -143,6 +146,7 @@ fun HomeScreen(
                 ChatBottomSheet(viewModel = searchViewModel)
             }
 
+            ResponsiveSpacer()
 
             when (categories) {
                 is UiState.Loading -> {
@@ -153,12 +157,12 @@ fun HomeScreen(
 
                 is UiState.Success -> {
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(2),
+                        columns = GridCells.Fixed(ResponsiveDimensions.getGridColumns()),
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = HomeScreenDimensions.GridHorizontalPadding),
-                        verticalArrangement = Arrangement.spacedBy(HomeScreenDimensions.GridVerticalSpacing),
-                        horizontalArrangement = Arrangement.spacedBy(HomeScreenDimensions.GridHorizontalSpacing)
+                            .padding(horizontal = ResponsiveDimensions.getScreenPadding()),
+                        verticalArrangement = Arrangement.spacedBy(ResponsiveDimensions.getGridSpacing()),
+                        horizontalArrangement = Arrangement.spacedBy(ResponsiveDimensions.getGridSpacing())
                     ) {
                         items(categories.data) { item ->
                             AppCategoryCard(
@@ -187,9 +191,18 @@ fun AppCategoryCard(
     containerColor: Color = cardColor,
     shape: Shape = RectangleShape
 ){
+    val responsiveLayout = com.example.labinventory.data.remote.LocalResponsiveLayout.current
+    val cardHeight = when (responsiveLayout.screenSize) {
+        com.example.labinventory.data.model.ScreenSize.SMALL_PHONE -> 80.dp
+        com.example.labinventory.data.model.ScreenSize.MEDIUM_PHONE -> 90.dp
+        com.example.labinventory.data.model.ScreenSize.LARGE_PHONE -> 100.dp
+        com.example.labinventory.data.model.ScreenSize.SMALL_TABLET -> 120.dp
+        com.example.labinventory.data.model.ScreenSize.LARGE_TABLET -> 140.dp
+        com.example.labinventory.data.model.ScreenSize.DESKTOP -> 160.dp
+    }
+    
     Card(
-        modifier = Modifier
-            .height(HomeScreenDimensions.CategoryCardHeight),
+        modifier = Modifier.height(cardHeight),
         onClick = onClick,
         shape = shape,
         colors = CardDefaults.cardColors(
@@ -199,7 +212,7 @@ fun AppCategoryCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(HomeScreenDimensions.CategoryCardPadding)
+                .padding(ResponsiveDimensions.getCardPadding())
         ){
 
             CustomLabel(
@@ -207,7 +220,14 @@ fun AppCategoryCard(
                 modifier = Modifier
                     .align(Alignment.TopStart)
                     .fillMaxWidth(0.8f),
-                fontSize = HomeScreenDimensions.CategoryCardFontSize.value.sp,
+                fontSize = when (responsiveLayout.screenSize) {
+                    com.example.labinventory.data.model.ScreenSize.SMALL_PHONE -> 14.sp
+                    com.example.labinventory.data.model.ScreenSize.MEDIUM_PHONE -> 15.sp
+                    com.example.labinventory.data.model.ScreenSize.LARGE_PHONE -> 16.sp
+                    com.example.labinventory.data.model.ScreenSize.SMALL_TABLET -> 17.sp
+                    com.example.labinventory.data.model.ScreenSize.LARGE_TABLET -> 18.sp
+                    com.example.labinventory.data.model.ScreenSize.DESKTOP -> 19.sp
+                },
                 headerColor = categoryColor
             )
 

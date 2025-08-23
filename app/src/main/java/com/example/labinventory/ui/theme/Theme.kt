@@ -46,13 +46,15 @@ fun LabInventoryTheme(
         WindowType.Expanded -> ExpandedSpacing
     }
 
+    // Get responsive typography that adapts to screen size
+    val responsiveTypography = getResponsiveTypography()
 
     CompositionLocalProvider(
         LocalWindowSizeClass provides windowSizeClass,
         LocalSpacing provides spacing
     ) {
         MaterialTheme(
-            typography = Typography,
+            typography = responsiveTypography,
             content = content
         )
     }

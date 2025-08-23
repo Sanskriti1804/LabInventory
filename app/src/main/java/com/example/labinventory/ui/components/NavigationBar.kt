@@ -29,9 +29,39 @@ import com.example.labinventory.ui.theme.navLabelColor
 import com.example.labinventory.ui.theme.someOtherGrayColor
 import com.example.labinventory.ui.theme.whiteColor
 import com.example.labinventory.util.pxToDp
+import com.example.labinventory.data.remote.LocalResponsiveLayout
+import com.example.labinventory.data.model.ResponsiveLayout
+import com.example.labinventory.ui.components.ResponsiveNavigationBar
 
 @Composable
 fun CustomNavigationBar(
+    bottomBarColor: Color = whiteColor,
+    badgeColor: Color = highlightColor,
+    selectedColor: Color = highlightColor,
+    contentColor: Color = navLabelColor,
+    dividerColor: Color = someOtherGrayColor,
+    navController: NavHostController
+) {
+    val responsiveLayout = LocalResponsiveLayout.current
+    
+    // Use responsive navigation for tablets in landscape mode
+    if (responsiveLayout.isTablet && responsiveLayout.isLandscape) {
+        ResponsiveNavigationBar(navController)
+    } else {
+        // Use traditional bottom navigation for phones and portrait tablets
+        TraditionalBottomNavigation(
+            bottomBarColor = bottomBarColor,
+            badgeColor = badgeColor,
+            selectedColor = selectedColor,
+            contentColor = contentColor,
+            dividerColor = dividerColor,
+            navController = navController
+        )
+    }
+}
+
+@Composable
+private fun TraditionalBottomNavigation(
     bottomBarColor: Color = whiteColor,
     badgeColor: Color = highlightColor,
     selectedColor: Color = highlightColor,
