@@ -184,23 +184,6 @@ The application integrates with Supabase APIs:
 - Dark/Light theme support
 - Edge-to-edge display support
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🆘 Support
-
-- **Issues**: Report bugs and feature requests through GitHub Issues
-- **Documentation**: Check the code comments and this README
-- **Community**: Join our community discussions
 
 ## 🔄 Changelog
 
