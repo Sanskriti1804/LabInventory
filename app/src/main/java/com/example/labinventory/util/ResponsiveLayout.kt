@@ -140,6 +140,84 @@ object ResponsiveLayout {
     }
     
     /**
+     * Get responsive horizontal padding values for different screen sizes
+     */
+    @Composable
+    fun getResponsiveHorizontalPadding(
+        phone: Dp = 16.dp,
+        tablet: Dp = 20.dp,
+        largeTablet: Dp = 24.dp
+    ): Dp {
+        val dimensions = ResponsiveDimensions.getResponsiveDimensions()
+        return when (dimensions.deviceType) {
+            DeviceType.PHONE -> phone
+            DeviceType.LARGE_PHONE -> phone
+            DeviceType.TABLET -> tablet
+            DeviceType.LARGE_TABLET -> largeTablet
+        }
+    }
+    
+    /**
+     * Get responsive vertical padding values for different screen sizes
+     */
+    @Composable
+    fun getResponsiveVerticalPadding(
+        phone: Dp = 16.dp,
+        tablet: Dp = 20.dp,
+        largeTablet: Dp = 24.dp
+    ): Dp {
+        val dimensions = ResponsiveDimensions.getResponsiveDimensions()
+        return when (dimensions.deviceType) {
+            DeviceType.PHONE -> phone
+            DeviceType.LARGE_PHONE -> phone
+            DeviceType.TABLET -> tablet
+            DeviceType.LARGE_TABLET -> largeTablet
+        }
+    }
+    
+    /**
+     * Get responsive padding values as PaddingValues object for use with Modifier.padding()
+     */
+    @Composable
+    fun getResponsivePaddingValues(
+        horizontal: Dp = 16.dp,
+        vertical: Dp = 16.dp
+    ): PaddingValues {
+        return PaddingValues(
+            horizontal = horizontal,
+            vertical = vertical
+        )
+    }
+    
+    /**
+     * Get responsive padding values with custom horizontal and vertical values for different screen sizes
+     */
+    @Composable
+    fun getResponsivePaddingValues(
+        horizontalPhone: Dp = 16.dp,
+        horizontalTablet: Dp = 20.dp,
+        horizontalLargeTablet: Dp = 24.dp,
+        verticalPhone: Dp = 16.dp,
+        verticalTablet: Dp = 20.dp,
+        verticalLargeTablet: Dp = 24.dp
+    ): PaddingValues {
+        val dimensions = ResponsiveDimensions.getResponsiveDimensions()
+        val horizontal = when (dimensions.deviceType) {
+            DeviceType.PHONE -> horizontalPhone
+            DeviceType.LARGE_PHONE -> horizontalPhone
+            DeviceType.TABLET -> horizontalTablet
+            DeviceType.LARGE_TABLET -> horizontalLargeTablet
+        }
+        val vertical = when (dimensions.deviceType) {
+            DeviceType.PHONE -> verticalPhone
+            DeviceType.LARGE_PHONE -> verticalPhone
+            DeviceType.TABLET -> verticalTablet
+            DeviceType.LARGE_TABLET -> verticalLargeTablet
+        }
+        return PaddingValues(horizontal = horizontal, vertical = vertical)
+    }
+    
+    /**
      * Get responsive size values for different screen sizes
      */
     @Composable

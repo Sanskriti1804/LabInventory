@@ -205,17 +205,17 @@ fun ProductCarousel(
                         .fillMaxSize()
                 )
             }
-            Spacer(modifier = Modifier.height(pxToDp(16)))
-            HorizontalPagerIndicator(
-                pagerState = pagerState, // Use the passed pagerState
-                pageCount = images.size,
-                inactiveColor = inactiveColor,
-                activeColor = activeColor,
-                indicatorShape = indicatorShape,
-                modifier = Modifier
-                    .size(indicatorSize)
-            )
-            Spacer(modifier = Modifier.height(pxToDp(3)))
+                         Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(16.dp, 18.dp, 20.dp)))
+             HorizontalPagerIndicator(
+                 pagerState = pagerState, // Use the passed pagerState
+                 pageCount = images.size,
+                 inactiveColor = inactiveColor,
+                 activeColor = activeColor,
+                 indicatorShape = indicatorShape,
+                 modifier = Modifier
+                     .size(indicatorSize)
+             )
+             Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(3.dp, 4.dp, 5.dp)))
         }
 
     }
@@ -233,7 +233,7 @@ fun ProductDescriptionCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .height(pxToDp(190)),
+            .height(ResponsiveLayout.getResponsiveSize(190.dp, 210.dp, 230.dp)),
         shape = shape,
         colors = CardDefaults.cardColors(
             containerColor = cardContainerColor
@@ -242,20 +242,20 @@ fun ProductDescriptionCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(pxToDp(16))
+                .padding(ResponsiveLayout.getResponsivePadding(16.dp, 18.dp, 20.dp))
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(pxToDp(16))
+                verticalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(16.dp, 18.dp, 20.dp))
             ) {
                 CustomLabel(
                     header = "Canon EOS R50 V",
                     headerColor = darkTextColor,
-                    fontSize = 16.sp,
+                    fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp),
                     modifier = Modifier
                 )
-                Spacer(modifier = Modifier.height(pxToDp(3)))
+                Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(3.dp, 4.dp, 5.dp)))
 
                 when(facilitiesList){
                     is UiState.Loading -> {
@@ -280,9 +280,9 @@ fun ProductDescriptionCard(
                 painter = painterResource(R.drawable.ic_favorite),
                 iconDescription = "Save Icon",
                 modifier = Modifier
-                    .padding(pxToDp(2))
+                    .padding(ResponsiveLayout.getResponsivePadding(2.dp, 3.dp, 4.dp))
                     .align(Alignment.TopEnd),
-                iconSize = pxToDp(20),
+                iconSize = ResponsiveLayout.getResponsiveSize(20.dp, 22.dp, 24.dp),
             )
         }
     }
@@ -292,20 +292,27 @@ fun ProductDescriptionCard(
     fun InfoRow(label: String, value: String) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(pxToDp(12)),
+            horizontalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(12.dp, 14.dp, 16.dp)),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CustomLabel(
-                header = label,
-                modifier = Modifier.weight(0.2f),
-                headerColor = darkTextColor.copy(alpha = 0.5f),
-                fontSize = 14.sp
-            )
+            // Fixed width for label to ensure consistent layout
+            Box(
+                modifier = Modifier
+                    .width(ResponsiveLayout.getResponsiveSize(60.dp, 70.dp, 80.dp))
+                    .padding(end = ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
+            ) {
+                CustomLabel(
+                    header = label,
+                    modifier = Modifier.fillMaxWidth(),
+                    headerColor = darkTextColor.copy(alpha = 0.5f),
+                    fontSize = ResponsiveLayout.getResponsiveFontSize(14.sp, 15.sp, 16.sp)
+                )
+            }
             CustomLabel(
                 header = value,
                 modifier = Modifier.weight(1f),
                 headerColor = darkTextColor.copy(alpha = 0.8f),
-                fontSize = 14.sp
+                fontSize = ResponsiveLayout.getResponsiveFontSize(14.sp, 15.sp, 16.sp)
             )
         }
     }
@@ -333,11 +340,18 @@ fun InChargeCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(16))
+                .padding(ResponsiveLayout.getResponsivePaddingValues(
+                    horizontalPhone = 16.dp,
+                    horizontalTablet = 20.dp,
+                    horizontalLargeTablet = 24.dp,
+                    verticalPhone = 16.dp,
+                    verticalTablet = 20.dp,
+                    verticalLargeTablet = 24.dp
+                ))
         ) {
             if (expanded) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(12)),
+                    verticalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(12.dp, 16.dp, 20.dp)),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     when(facilitiesList){
@@ -349,9 +363,9 @@ fun InChargeCard(
                                 CustomLabel(
                                     header = "InCharge",
                                     headerColor = darkTextColor.copy(0.9f),
-                                    fontSize = 16.sp
+                                    fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                                 )
-                                Spacer(modifier = Modifier.height(pxToDp(5)))
+                                Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(5.dp, 8.dp, 10.dp)))
                                 InChargeRow(label = "Prof.", name = currentFacility.prof_incharge)
                                 InChargeRow(
                                     label = "Asst.",
@@ -370,7 +384,7 @@ fun InChargeCard(
                     CustomLabel(
                         header = "InCharge",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp
+                        fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                     )
                 }
             }
@@ -381,8 +395,10 @@ fun InChargeCard(
                 ),
                 iconDescription = "Expand Icon",
                 tint = darkTextColor,
-                iconSize = pxToDp(20),
-                modifier = Modifier.align(iconAlignment).padding(pxToDp(4))
+                iconSize = ResponsiveLayout.getResponsiveSize(20.dp, 22.dp, 24.dp),
+                modifier = Modifier
+                    .align(iconAlignment)
+                    .padding(ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
             )
         }
     }
@@ -397,33 +413,50 @@ fun InChargeRow(
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp)),
         modifier = Modifier.fillMaxWidth()
     ) {
-        CustomLabel(
-            header = label,
-            headerColor = darkTextColor.copy(alpha = 0.5f),
-            fontSize = 14.sp,
-            modifier = Modifier.weight(0.2f)
-        )
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(pxToDp(16)),
+        // Fixed width for label to ensure consistent layout
+        Box(
             modifier = Modifier
-                .weight(0.9f)
+                .width(ResponsiveLayout.getResponsiveSize(40.dp, 45.dp, 50.dp))
+                .padding(end = ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
+        ) {
+            CustomLabel(
+                header = label,
+                headerColor = darkTextColor.copy(alpha = 0.5f),
+                fontSize = ResponsiveLayout.getResponsiveFontSize(14.sp, 15.sp, 16.sp),
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+        
+        // Flexible content area for name and icons
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(16.dp, 18.dp, 20.dp)),
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
         ) {
             CustomLabel(
                 header = name,
                 headerColor = darkTextColor.copy(alpha = 0.8f),
-                fontSize = 14.sp,
-                modifier = Modifier.padding(pxToDp(10))
+                fontSize = ResponsiveLayout.getResponsiveFontSize(14.sp, 15.sp, 16.sp),
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp))
+                    .padding(end = ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp))
             )
 
             icons.forEach {
-                val adjustedIconSize = if (it == R.drawable.ic_call) pxToDp(16) else pxToDp(20)
+                val adjustedIconSize = if (it == R.drawable.ic_call) 
+                    ResponsiveLayout.getResponsiveSize(16.dp, 17.dp, 18.dp) 
+                else 
+                    ResponsiveLayout.getResponsiveSize(20.dp, 21.dp, 22.dp)
+                
                 AppCircularIcon(
                     painter = painterResource(it),
-                    boxSize = pxToDp(28),
-                    iconPadding = pxToDp(4),
+                    boxSize = ResponsiveLayout.getResponsiveSize(28.dp, 30.dp, 32.dp),
+                    iconPadding = ResponsiveLayout.getResponsivePadding(4.dp, 5.dp, 6.dp),
                     iconSize = adjustedIconSize,
                     tint = highlightColor,
                     boxColor = circularBoxColor
@@ -453,11 +486,18 @@ fun AdditionalInfoCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(16))
+                .padding(ResponsiveLayout.getResponsivePaddingValues(
+                    horizontalPhone = 16.dp,
+                    horizontalTablet = 20.dp,
+                    horizontalLargeTablet = 24.dp,
+                    verticalPhone = 16.dp,
+                    verticalTablet = 20.dp,
+                    verticalLargeTablet = 24.dp
+                ))
         ) {
             if (expanded) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(12)),
+                    verticalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(12.dp, 16.dp, 20.dp)),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     when(facilitiesList){
@@ -469,11 +509,12 @@ fun AdditionalInfoCard(
                                 CustomLabel(
                                     header = "Additional Information",
                                     headerColor = darkTextColor.copy(0.9f),
-                                    fontSize = 16.sp
+                                    fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                                 )
-                                Spacer(modifier = Modifier.height(pxToDp(5)))
+                                Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(5.dp, 8.dp, 10.dp)))
                                 CustomLabel(
-                                    header = currentFacility.description ?: "No Description found"
+                                    header = currentFacility.description ?: "No Description found",
+                                    fontSize = ResponsiveLayout.getResponsiveFontSize(14.sp, 15.sp, 16.sp)
                                 )
                             }
                         }
@@ -487,7 +528,7 @@ fun AdditionalInfoCard(
                     CustomLabel(
                         header = "Additional Information",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp
+                        fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                     )
                 }
             }
@@ -498,8 +539,10 @@ fun AdditionalInfoCard(
                 ),
                 iconDescription = "Expand Icon",
                 tint = darkTextColor,
-                iconSize = pxToDp(20),
-                modifier = Modifier.align(iconAlignment).padding(pxToDp(4))
+                iconSize = ResponsiveLayout.getResponsiveSize(20.dp, 22.dp, 24.dp),
+                modifier = Modifier
+                    .align(iconAlignment)
+                    .padding(ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
             )
         }
     }
@@ -523,19 +566,26 @@ fun UseCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(pxToDp(16))
+                .padding(ResponsiveLayout.getResponsivePaddingValues(
+                    horizontalPhone = 16.dp,
+                    horizontalTablet = 20.dp,
+                    horizontalLargeTablet = 24.dp,
+                    verticalPhone = 16.dp,
+                    verticalTablet = 20.dp,
+                    verticalLargeTablet = 24.dp
+                ))
         ) {
             if (expanded) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(pxToDp(8)),
+                    verticalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp)),
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     CustomLabel(
                         header = "How to use",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp
+                        fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                     )
-                    Spacer(modifier = Modifier.height(pxToDp(5)))
+                    Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(5.dp, 8.dp, 10.dp)))
                     // Add the actual usage instructions here
                     Text("No usage instructions available") // Placeholder
                 }
@@ -547,7 +597,7 @@ fun UseCard(
                     CustomLabel(
                         header = "How to use",
                         headerColor = darkTextColor.copy(0.9f),
-                        fontSize = 16.sp
+                        fontSize = ResponsiveLayout.getResponsiveFontSize(16.sp, 18.sp, 20.sp)
                     )
                 }
             }
@@ -558,8 +608,10 @@ fun UseCard(
                 ),
                 iconDescription = "Expand Icon",
                 tint = darkTextColor,
-                iconSize = pxToDp(20),
-                modifier = Modifier.align(iconAlignment).padding(pxToDp(4))
+                iconSize = ResponsiveLayout.getResponsiveSize(20.dp, 22.dp, 24.dp),
+                modifier = Modifier
+                    .align(iconAlignment)
+                    .padding(ResponsiveLayout.getResponsivePadding(4.dp, 6.dp, 8.dp))
             )
         }
     }
@@ -579,7 +631,7 @@ fun ActionCard(
         Column() {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(pxToDp(18))
+                horizontalArrangement = Arrangement.spacedBy(ResponsiveLayout.getResponsivePadding(18.dp, 20.dp, 24.dp))
             ) {
                 AppButton(
                     onClick = onEditClick,
@@ -595,7 +647,7 @@ fun ActionCard(
                 )
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(ResponsiveLayout.getResponsivePadding(12.dp, 14.dp, 16.dp)))
 
             AppButton(
                 onClick = onBookClick,

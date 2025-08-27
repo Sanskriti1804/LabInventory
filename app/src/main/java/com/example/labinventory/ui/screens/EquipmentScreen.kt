@@ -285,7 +285,7 @@ fun EquipmentCard(
     onClick: () -> Unit = {},
     shape: Shape = RectangleShape,
     imageHeight: Dp = ResponsiveLayout.getResponsiveSize(125.dp, 140.dp, 160.dp),
-    detailHeight: Dp = ResponsiveLayout.getResponsiveSize(75.dp, 85.dp, 95.dp),
+    detailHeight: Dp = ResponsiveLayout.getResponsiveSize(85.dp, 95.dp, 110.dp),
     isSaved : Boolean = false,
     saveClick : () -> Unit = {},
     facilityName : String
@@ -334,7 +334,11 @@ fun EquipmentCard(
                     .height(detailHeight)
                     .fillMaxWidth()
                     .background(whiteColor)
-                    .padding(top = ResponsiveLayout.getResponsivePadding(6.dp, 8.dp, 10.dp)),
+                    .padding(
+                        top = ResponsiveLayout.getResponsivePadding(6.dp, 8.dp, 10.dp),
+                        start = ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp),
+                        end = ResponsiveLayout.getResponsivePadding(8.dp, 10.dp, 12.dp)
+                    ),
                 horizontalAlignment = Alignment.Start
             ) {
                 CustomLabel(
